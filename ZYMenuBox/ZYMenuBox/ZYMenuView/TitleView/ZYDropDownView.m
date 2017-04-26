@@ -81,7 +81,7 @@
         self.titleLabel.textColor = [UIColor colorWithHexString:DropDownBoxSelectedColor];
         self.arrow.image = [UIImage imageNamed:@"pullup"];
     } else{
-        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.textColor = [UIColor colorWithHexString:DropDownBoxNormalColor];
         self.arrow.image = [UIImage imageNamed:@"pulldown"];
     }
 }

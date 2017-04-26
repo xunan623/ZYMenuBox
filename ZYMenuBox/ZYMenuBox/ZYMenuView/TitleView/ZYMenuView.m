@@ -121,7 +121,7 @@
     ZYItem *item = self.itemArray[index];
     //混合类型不做UI赋值操作 直接将item的路径回调回去就好了
     if (item.displayType == ZYPopupViewDisplayTypeMultilayer || item.displayType == ZYPopupViewDisplayTypeNormal) {
-        //拼接选择项
+        // 更新选项卡标题
         NSMutableString *title = [NSMutableString string];
         for (int i = 0; i <array.count; i++) {
             ZYSelectedPath *path = array[i];
@@ -132,7 +132,7 @@
         [box updateTitleContent:title];
     };
     
-    if ([self.delegate respondsToSelector:@selector(popupView:didSelectedItemsPackagingInArray:atIndex:)]) {
+    if ([self.delegate respondsToSelector:@selector(menuView:didSelectedItemsPackagingInArray:atIndex:)]) {
         [self.delegate menuView:self didSelectedItemsPackagingInArray:array atIndex:index];
     }
 }

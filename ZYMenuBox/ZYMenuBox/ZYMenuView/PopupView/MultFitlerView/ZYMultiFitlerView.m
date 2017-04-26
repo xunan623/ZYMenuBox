@@ -8,14 +8,13 @@
 
 #import "ZYMultiFitlerView.h"
 
+@interface ZYMultiFitlerView() <UITableViewDelegate, UITableViewDataSource>
+
+
+
+@end
+
 @implementation ZYMultiFitlerView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

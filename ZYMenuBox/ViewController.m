@@ -11,6 +11,7 @@
 #import "ZYMenuBox.h"
 #import "ZYItem.h"
 #import "ZYSingleItem.h"
+#import "ZYMenuDataSouce.h"
 
 @interface ViewController () <ZYMenuViewDelegate, ZYMenuViewDataSource>
 
@@ -34,25 +35,6 @@
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
-        
-        ZYSingleItem *rootItem3 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"价格"];
-        ZYSingleItem *rootItem1 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"区域"];
-        ZYSingleItem *rootItem4 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"面积"];
-        ZYSingleItem *rootItem5 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"户型"];
-
-        ZYSingleItem *rootItem2 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"排序"];
-        [rootItem2  addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected isSelected:YES titleName:@"排序" subtitleName:nil code:nil]];
-        [rootItem2 addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected titleName:[NSString stringWithFormat:@"智能排序"]]];
-        [rootItem2 addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected titleName:[NSString stringWithFormat:@"离我最近"]]];
-        [rootItem2 addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected titleName:[NSString stringWithFormat:@"好评优先"]]];
-        [rootItem2 addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected titleName:[NSString stringWithFormat:@"人气最高"]]];
-
-        
-        [_dataArray addObject:rootItem1];
-        [_dataArray addObject:rootItem2];
-        [_dataArray addObject:rootItem3];
-        [_dataArray addObject:rootItem4];
-        [_dataArray addObject:rootItem5];
     }
     return _dataArray;
 }
@@ -60,7 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.menuListView];
+    self.dataArray = [ZYMenuDataSouce getDataArray:ZYMenuDataSouceTypeRent];
     [self.menuListView reload];
+
 }
 
 #pragma mark - ZYMenuViewDelegate, ZYMenuViewDataSource
