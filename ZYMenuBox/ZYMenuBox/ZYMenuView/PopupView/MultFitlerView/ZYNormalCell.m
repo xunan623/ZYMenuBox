@@ -31,7 +31,7 @@ static const CGFloat horizontalMargin = 10.0f;
 - (void)setItem:(ZYItem *)item {
     _item = item;
     self.title.text = item.title;
-    self.title.textColor = item.isSelected?[UIColor colorWithHexString:titleSelectedColor]:[UIColor blackColor];
+    self.title.textColor = item.isSelected?[UIColor colorWithHexString:titleSelectedColor]:[UIColor colorWithHexString:DropDownBoxNormalColor];
 
     self.backgroundColor = item.isSelected?[UIColor colorWithHexString:SelectedBGColor]:[UIColor colorWithHexString:UnselectedBGColor];
 }
