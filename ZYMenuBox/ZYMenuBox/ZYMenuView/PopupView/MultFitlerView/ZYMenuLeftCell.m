@@ -25,7 +25,7 @@
         [self.layer addSublayer:self.bottomLine];
     }
     return self;
-}
+}   
 
 - (void)layoutSubviews {
     [super layoutSubviews];

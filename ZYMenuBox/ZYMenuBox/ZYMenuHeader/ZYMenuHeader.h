@@ -14,7 +14,7 @@
 
 #define scale [UIScreen mainScreen].scale
 static  NSString *titleSelectedColor = @"FF0000";
-static const CGFloat  ButtonFontSize = 14.0f;
+static const CGFloat  ButtonFontSize = 12.0f;
 //MMPopupView
 static const CGFloat PopupViewRowHeight = 44.0f;
 static const CGFloat DistanceBeteewnPopupViewAndBottom =80.0f;
@@ -37,6 +37,7 @@ static  NSString *UnselectedBGColor = @"FFFFFF";
 //MMComBoBoxView
 
 //MMCombinationFitlerView
+static NSString *CombinationBottomBGColor = @"9398AA";
 static const CGFloat AlternativeTitleVerticalMargin = 10.0f;
 static const CGFloat AlternativeTitleHeight = 31.0f;
 

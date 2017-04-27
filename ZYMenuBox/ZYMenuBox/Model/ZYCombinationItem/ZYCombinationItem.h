@@ -17,6 +17,4 @@
 - (void)addLayoutInformationWhenTypeFilters;
 - (void)addAlternativeItem:(ZYAlternativeItem *)item;
 
-
-
 @end

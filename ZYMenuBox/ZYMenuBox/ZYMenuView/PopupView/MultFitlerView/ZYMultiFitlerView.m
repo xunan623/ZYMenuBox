@@ -53,6 +53,8 @@
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tag = index;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
         tableView.tableFooterView = [UIView new];
         if (self.item.numberOflayers == ZYPopupViewThreelayers) {
             [tableView registerClass:[ZYMenuLeftCell class] forCellReuseIdentifier:MainCellID];

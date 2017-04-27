@@ -37,6 +37,8 @@
 		7187CFB81EB0A94F001A8332 /* ZYNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7187CFB51EB0A94F001A8332 /* ZYNormalCell.m */; };
 		7187CFBB1EB0AE5E001A8332 /* ZYMultiFitlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7187CFBA1EB0AE5E001A8332 /* ZYMultiFitlerView.m */; };
 		7187CFBE1EB0B04F001A8332 /* ZYMenuLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7187CFBD1EB0B04F001A8332 /* ZYMenuLeftCell.m */; };
+		71A187A21EB1C0B2001096BE /* ZYMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A187A11EB1C0B2001096BE /* ZYMenuHeaderView.m */; };
+		71A187A51EB1C512001096BE /* ZYCombinationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A187A41EB1C512001096BE /* ZYCombinationCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,10 @@
 		7187CFBA1EB0AE5E001A8332 /* ZYMultiFitlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMultiFitlerView.m; sourceTree = "<group>"; };
 		7187CFBC1EB0B04F001A8332 /* ZYMenuLeftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuLeftCell.h; sourceTree = "<group>"; };
 		7187CFBD1EB0B04F001A8332 /* ZYMenuLeftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuLeftCell.m; sourceTree = "<group>"; };
+		71A187A01EB1C0B2001096BE /* ZYMenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuHeaderView.h; sourceTree = "<group>"; };
+		71A187A11EB1C0B2001096BE /* ZYMenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuHeaderView.m; sourceTree = "<group>"; };
+		71A187A31EB1C512001096BE /* ZYCombinationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCombinationCell.h; sourceTree = "<group>"; };
+		71A187A41EB1C512001096BE /* ZYCombinationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCombinationCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +304,10 @@
 			children = (
 				7118660F1EAF63E700A555E4 /* ZYCombinationFitlerView.h */,
 				711866101EAF63E700A555E4 /* ZYCombinationFitlerView.m */,
+				71A187A01EB1C0B2001096BE /* ZYMenuHeaderView.h */,
+				71A187A11EB1C0B2001096BE /* ZYMenuHeaderView.m */,
+				71A187A31EB1C512001096BE /* ZYCombinationCell.h */,
+				71A187A41EB1C512001096BE /* ZYCombinationCell.m */,
 			);
 			path = CombinationFilerView;
 			sourceTree = "<group>";
@@ -430,8 +440,10 @@
 				711865F01EAF4E2D00A555E4 /* ZYCombinationItem.m in Sources */,
 				711865EA1EAF4D7F00A555E4 /* ZYAlternativeItem.m in Sources */,
 				711865E01EAF3D9800A555E4 /* ZYItem.m in Sources */,
+				71A187A51EB1C512001096BE /* ZYCombinationCell.m in Sources */,
 				711865D31EAF12FC00A555E4 /* UIColor+ZYMenuExtension.m in Sources */,
 				716B26621EB050CE003D3B8D /* ZYMenuDataSouce.m in Sources */,
+				71A187A21EB1C0B2001096BE /* ZYMenuHeaderView.m in Sources */,
 				711865FF1EAF601300A555E4 /* ZYDropDownView.m in Sources */,
 				711865F41EAF50EE00A555E4 /* ZYSelectedPath.m in Sources */,
 			);

@@ -7,7 +7,10 @@
 //
 
 #import "ZYBasePopupView.h"
+#import "ZYCombinationItem.h"
 
 @interface ZYCombinationFitlerView : ZYBasePopupView
+
+@property (strong, nonatomic) ZYCombinationItem *item;
 
 @end

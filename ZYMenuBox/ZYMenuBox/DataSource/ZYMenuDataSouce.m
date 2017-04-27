@@ -10,6 +10,7 @@
 #import "ZYItem.h"
 #import "ZYSingleItem.h"
 #import "ZYMultiItem.h"
+#import "ZYCombinationItem.h"
 
 @implementation ZYMenuDataSouce
 
@@ -20,9 +21,38 @@
     ZYSingleItem *rootItem2 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"价格"];
     ZYSingleItem *rootItem3 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"面积"];
     ZYSingleItem *rootItem4 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"户型"];
-    ZYSingleItem *rootItem5 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"更多"];
     
-    // 区域 多选
+    ZYCombinationItem *rootItem5 = [ZYCombinationItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"更多"];
+    
+    // 更多 多选
+    rootItem5.selectedType = ZYPopupViewMultilSeMultiSelection;
+    rootItem5.displayType = ZYPopupViewDisplayTypeFilters;
+
+    // 标签
+    NSArray *tagArray = @[@"满五", @"满二", @"唯一", @"地铁房", @"学区房", @"签赔", @"钥匙", @"租售", @"备案", @"独家", @"委托"];
+    // 朝向
+    NSArray *directionArray = @[@"东", @"西" , @"南", @"北", @"东南", @"西南", @"东北", @"西北", @"南北"];
+    // 面积
+    NSArray *areaTitle = @[@"全部",@"50平米以下",@"50-70平米",@"70-90平米",@"90-110平米",@"110-130平米",@"130-150平米",@"150-200平米",@"200-300平米",@"300平米以上"];
+    NSArray *areaCode = @[@"",@"0-49",@"50-70",@"70-90",@"90-110",@"110-130",@"130-150",@"150-200",@"200-300",@"301-"];
+    NSArray *comArray = @[@{@"标签" : tagArray},
+                          @{@"朝向" : directionArray},
+                          @{@"面积" : areaTitle}];
+    
+    for (NSDictionary *itemDict in comArray) {
+        ZYItem *item5_A = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:[itemDict.allKeys lastObject]];
+        [rootItem5 addNode:item5_A];
+        for (NSInteger i = 0; i < [[itemDict.allValues lastObject] count]; i++) {
+            NSString *title = [itemDict.allValues lastObject][i];
+            ZYItem *item5_B = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:title];
+            if (i == 0) item5_B.isSelected = YES;
+            
+            [item5_A addNode:item5_B];
+        }
+    }
+    
+    
+    // 区域 二级菜单
     rootItem1.displayType = ZYPopupViewDisplayTypeMultilayer;
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"];
@@ -89,9 +119,6 @@
             break;
     }
     
-    // 面积
-    NSArray *areaTitle = @[@"全部",@"50平米以下",@"50-70平米",@"70-90平米",@"90-110平米",@"110-130平米",@"130-150平米",@"150-200平米",@"200-300平米",@"300平米以上"];
-    NSArray *areaCode = @[@"",@"0-49",@"50-70",@"70-90",@"90-110",@"110-130",@"130-150",@"150-200",@"200-300",@"301-"];
     for (NSInteger i = 0; i< areaCode.count; i++) {
         [rootItem3 addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected isSelected:(i==0 ? YES : NO)
                                           titleName:areaTitle[i]
