@@ -8,6 +8,7 @@
 
 #import "ZYCombinationFitlerView.h"
 #import "ZYCombinationCell.h"
+#import "ZYCombTextFieldCell.h"
 
 @interface ZYCombinationFitlerView()<UITableViewDelegate, UITableViewDataSource, ZYCombinationCellDelegate>
 
@@ -55,6 +56,8 @@
     self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
+    
+    [self.mainTableView registerClass:[ZYCombTextFieldCell class] forCellReuseIdentifier:TextFieldCellID];
     [self.mainTableView registerClass:[ZYCombinationCell class] forCellReuseIdentifier:MainCellID];
     [self addSubview:self.mainTableView];
     
@@ -224,10 +227,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ZYCombinationCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
-    cell.item = self.item.childrenNodes[indexPath.row];
-    cell.delegate = self;
-    return cell;
+    ZYItem *item = self.item.childrenNodes[indexPath.row];
+    if (item.selectedType == ZYPopupViewInputViewSelection) { // 输入框
+        ZYCombTextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:TextFieldCellID forIndexPath:indexPath];
+        cell.item = self.item.childrenNodes[indexPath.row];
+        return cell;
+    } else { // 单选多选
+        ZYCombinationCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
+        cell.item = self.item.childrenNodes[indexPath.row];
+        cell.delegate = self;
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -244,7 +254,7 @@
         case ZYPopupViewSingleSelection: { // 单选处理
             if ([self _iscontainsSelectedPath:[ZYSelectedPath pathWithFirstPath:indexPath.row
                                                                      secondPath:index]
-                                  sourceArray:itemArray] && itemArray.count == 1) return; // 包含
+                                                                    sourceArray:itemArray] && itemArray.count == 1) return; // 包含
             ZYSelectedPath *removeIndexPath = [itemArray lastObject];
             [itemArray removeAllObjects];
             self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = NO;

@@ -12,11 +12,15 @@
 #import "ZYItem.h"
 #import "ZYSingleItem.h"
 #import "ZYMenuDataSouce.h"
+#import "ZYMenuResultView.h"
+#import "ZYMenuHeader.h"
 
 @interface ViewController () <ZYMenuViewDelegate, ZYMenuViewDataSource>
 
 @property (strong, nonatomic) ZYMenuView *menuListView;
+@property (strong, nonatomic) ZYMenuResultView *resultView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) UIView *bottomView;
 
 @end
 
@@ -32,6 +36,23 @@
     return _menuListView;
 }
 
+- (ZYMenuResultView *)resultView {
+    if (!_resultView) {
+        _resultView = [[ZYMenuResultView alloc] init];
+        _resultView.frame = CGRectMake(0, CGRectGetMaxY(self.menuListView.frame), kScreenWidth, 0);
+        _resultView.bgColor = [UIColor colorWithHexString:MenuResultBgColor];
+    }
+    return _resultView;
+}
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.resultView.frame), kScreenWidth, 200)];
+        _bottomView.backgroundColor = [UIColor redColor];
+    }
+    return _bottomView;
+}
+
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
@@ -40,9 +61,14 @@
     return _dataArray;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setAutoresizesSubviews:YES];
+    
     [self.view addSubview:self.menuListView];
+    [self.view addSubview:self.resultView];
+    [self.view addSubview:self.bottomView];
     self.dataArray = [ZYMenuDataSouce getDataArray:ZYMenuDataSouceTypeRent];
     [self.menuListView reload];
 
@@ -59,8 +85,12 @@
 }
 
 - (void)menuView:(ZYMenuView *)menuView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSInteger)index {
-    ZYItem *rootItem = self.dataArray[index];
-    NSLog(@"%@", rootItem);
+    
+
+    [self.resultView setupWithArray:self.dataArray withIndex:index];
+    
+    self.bottomView.top = CGRectGetMaxY(self.resultView.frame);
+    
 }
 
 

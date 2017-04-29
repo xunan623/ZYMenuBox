@@ -35,19 +35,35 @@
     // 面积
     NSArray *areaTitle = @[@"全部",@"50平米以下",@"50-70平米",@"70-90平米",@"90-110平米",@"110-130平米",@"130-150平米",@"150-200平米",@"200-300平米",@"300平米以上"];
     NSArray *areaCode = @[@"",@"0-49",@"50-70",@"70-90",@"90-110",@"110-130",@"130-150",@"150-200",@"200-300",@"301-"];
+    
+    NSArray *floorCode = @[@"", @""];
     NSArray *comArray = @[@{@"标签" : tagArray},
                           @{@"朝向" : directionArray},
-                          @{@"面积" : areaTitle}];
-    
-    for (NSDictionary *itemDict in comArray) {
+                          @{@"面积" : areaTitle},
+                          @{@"自定义楼层" : floorCode}];
+    for (NSInteger i = 0; i < comArray.count; i++) {
+        NSDictionary *itemDict = comArray[i];
         ZYItem *item5_A = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:[itemDict.allKeys lastObject]];
+        if (i == comArray.count - 1) item5_A.selectedType = ZYPopupViewInputViewSelection;
         [rootItem5 addNode:item5_A];
-        for (NSInteger i = 0; i < [[itemDict.allValues lastObject] count]; i++) {
-            NSString *title = [itemDict.allValues lastObject][i];
-            ZYItem *item5_B = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:title];
-            if (i == 0) item5_B.isSelected = YES;
-            
-            [item5_A addNode:item5_B];
+        
+        if (i == comArray.count -1) {
+            NSInteger count = [[itemDict.allValues lastObject] count];
+            for (NSInteger k = 0; k < count; k++) {
+                NSString *title = [itemDict.allValues lastObject][k];
+                ZYItem *item5_B = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:title];
+                if (k == 0) item5_B.isSelected = YES;
+                item5_B.selectedType = ZYPopupViewInputViewSelection;
+                [item5_A addNode:item5_B];
+            }
+        } else {
+            NSInteger count = [[itemDict.allValues lastObject] count];
+            for (NSInteger j = 0; j < count; j++) {
+                NSString *title = [itemDict.allValues lastObject][j];
+                ZYItem *item5_B = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:title];
+                if (j == 0) item5_B.isSelected = YES;
+                [item5_A addNode:item5_B];
+            }
         }
     }
     

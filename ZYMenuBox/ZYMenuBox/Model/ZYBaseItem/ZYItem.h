@@ -17,8 +17,9 @@ typedef NS_ENUM(NSUInteger, ZYPopupViewMarkType) {  //选中的状态
 };
 
 typedef NS_ENUM(NSUInteger, ZYPopupViewSelectedType) { //是否支持单选或者多选
-    ZYPopupViewSingleSelection,                            //单选
-    ZYPopupViewMultilSeMultiSelection,                    //多选
+    ZYPopupViewSingleSelection = 0,                            // 单选
+    ZYPopupViewMultilSeMultiSelection = 1,                     // 多选
+    ZYPopupViewInputViewSelection = 2                          // 输入框
 };
 
 typedef NS_ENUM(NSUInteger, ZYPopupViewDisplayType) { //分辨弹出来的view类型
