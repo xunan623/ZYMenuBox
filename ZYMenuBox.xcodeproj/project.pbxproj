@@ -34,6 +34,9 @@
 		714080901EB08B3E00080F73 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7140808E1EB08B3E00080F73 /* city.plist */; };
 		715E7E2B1EB310E100A5E247 /* ZYMenuResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E7E2A1EB310E100A5E247 /* ZYMenuResultView.m */; };
 		716559DD1EB2D01700A1DCCE /* ZYCombTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 716559DC1EB2D01700A1DCCE /* ZYCombTextFieldCell.m */; };
+		716AA5DE1EB4D6F4002EC350 /* ZYMenu_Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716AA5DC1EB4D6F4002EC350 /* ZYMenu_Close@2x.png */; };
+		716AA5DF1EB4D6F4002EC350 /* ZYMenu_Close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716AA5DD1EB4D6F4002EC350 /* ZYMenu_Close@3x.png */; };
+		716AA5E81EB4FDDF002EC350 /* ZYMenuTagViewBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 716AA5E71EB4FDDF002EC350 /* ZYMenuTagViewBtn.m */; };
 		716B26561EB02BDF003D3B8D /* ZYMultiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 716B26551EB02BDF003D3B8D /* ZYMultiItem.m */; };
 		716B26621EB050CE003D3B8D /* ZYMenuDataSouce.m in Sources */ = {isa = PBXBuildFile; fileRef = 716B26611EB050CE003D3B8D /* ZYMenuDataSouce.m */; };
 		7187CFB81EB0A94F001A8332 /* ZYNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7187CFB51EB0A94F001A8332 /* ZYNormalCell.m */; };
@@ -92,6 +95,10 @@
 		715E7E2A1EB310E100A5E247 /* ZYMenuResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuResultView.m; sourceTree = "<group>"; };
 		716559DB1EB2D01700A1DCCE /* ZYCombTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCombTextFieldCell.h; sourceTree = "<group>"; };
 		716559DC1EB2D01700A1DCCE /* ZYCombTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCombTextFieldCell.m; sourceTree = "<group>"; };
+		716AA5DC1EB4D6F4002EC350 /* ZYMenu_Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZYMenu_Close@2x.png"; sourceTree = "<group>"; };
+		716AA5DD1EB4D6F4002EC350 /* ZYMenu_Close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZYMenu_Close@3x.png"; sourceTree = "<group>"; };
+		716AA5E61EB4FDDF002EC350 /* ZYMenuTagViewBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuTagViewBtn.h; sourceTree = "<group>"; };
+		716AA5E71EB4FDDF002EC350 /* ZYMenuTagViewBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuTagViewBtn.m; sourceTree = "<group>"; };
 		716B26541EB02BDF003D3B8D /* ZYMultiItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMultiItem.h; sourceTree = "<group>"; };
 		716B26551EB02BDF003D3B8D /* ZYMultiItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMultiItem.m; sourceTree = "<group>"; };
 		716B26601EB050CE003D3B8D /* ZYMenuDataSouce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuDataSouce.h; sourceTree = "<group>"; };
@@ -346,6 +353,7 @@
 		715E7E271EB3100C00A5E247 /* ZYMenuResultBox */ = {
 			isa = PBXGroup;
 			children = (
+				716AA5DB1EB4D6F4002EC350 /* Resource */,
 				715E7E281EB3101D00A5E247 /* View */,
 			);
 			path = ZYMenuResultBox;
@@ -354,10 +362,21 @@
 		715E7E281EB3101D00A5E247 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				716AA5E61EB4FDDF002EC350 /* ZYMenuTagViewBtn.h */,
+				716AA5E71EB4FDDF002EC350 /* ZYMenuTagViewBtn.m */,
 				715E7E291EB310E100A5E247 /* ZYMenuResultView.h */,
 				715E7E2A1EB310E100A5E247 /* ZYMenuResultView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		716AA5DB1EB4D6F4002EC350 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				716AA5DC1EB4D6F4002EC350 /* ZYMenu_Close@2x.png */,
+				716AA5DD1EB4D6F4002EC350 /* ZYMenu_Close@3x.png */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		716B265C1EB050A8003D3B8D /* DataSource */ = {
@@ -432,9 +451,11 @@
 			files = (
 				711865CE1EAEFF2700A555E4 /* pullup@2x.png in Resources */,
 				711865CF1EAEFF2700A555E4 /* pullup@3x.png in Resources */,
+				716AA5DF1EB4D6F4002EC350 /* ZYMenu_Close@3x.png in Resources */,
 				7118655D1EAEDA2800A555E4 /* LaunchScreen.storyboard in Resources */,
 				714080901EB08B3E00080F73 /* city.plist in Resources */,
 				711865CC1EAEFF2700A555E4 /* pulldown@2x.png in Resources */,
+				716AA5DE1EB4D6F4002EC350 /* ZYMenu_Close@2x.png in Resources */,
 				711865CD1EAEFF2700A555E4 /* pulldown@3x.png in Resources */,
 				7140808F1EB08B3E00080F73 /* area.plist in Resources */,
 				7118655A1EAEDA2800A555E4 /* Assets.xcassets in Resources */,
@@ -471,6 +492,7 @@
 				716B26621EB050CE003D3B8D /* ZYMenuDataSouce.m in Sources */,
 				71A187A21EB1C0B2001096BE /* ZYMenuHeaderView.m in Sources */,
 				716559DD1EB2D01700A1DCCE /* ZYCombTextFieldCell.m in Sources */,
+				716AA5E81EB4FDDF002EC350 /* ZYMenuTagViewBtn.m in Sources */,
 				711865FF1EAF601300A555E4 /* ZYDropDownView.m in Sources */,
 				711865F41EAF50EE00A555E4 /* ZYSelectedPath.m in Sources */,
 				715E7E2B1EB310E100A5E247 /* ZYMenuResultView.m in Sources */,
