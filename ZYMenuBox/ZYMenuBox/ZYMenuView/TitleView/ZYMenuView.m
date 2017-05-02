@@ -41,6 +41,42 @@
     }
     return self;
 }
+- (void)reloadTitle {
+    
+    for (NSInteger i =0; i< self.dropDownViewArray.count; i++) {
+        ZYDropDownView *dropMenu = self.dropDownViewArray[i];
+        ZYItem *item = self.itemArray[i];
+        switch (item.displayType) {
+            case ZYPopupViewDisplayTypeNormal: {
+                for (NSInteger i =0; i<item.childrenNodes.count; i++) {
+                    ZYItem *subItem = item.childrenNodes[i];
+                    if (i == 0 && subItem.isSelected == YES) {
+                        [dropMenu updateTitleContent:item.title];
+                    }
+                }
+                break;}
+            case ZYPopupViewDisplayTypeMultilayer:{
+                
+                for (NSInteger i =0; i<item.childrenNodes.count; i++) {
+                    ZYItem *subItem = item.childrenNodes[i];
+                    for (NSInteger j =0; j < subItem.childrenNodes.count; j++) {
+                        ZYItem *subItemB = subItem.childrenNodes[j];
+                        if (i== 0 && j==0 && subItemB.isSelected == YES && subItem.isSelected == YES) {
+                            [dropMenu updateTitleContent:item.title];
+                        }
+                    }
+                }
+                break;}
+            case ZYPopupViewDisplayTypeFilters:{
+                
+                
+                break;}
+            default:
+                break;
+        }
+    }
+
+}
 
 - (void)reload {
     NSInteger count = 0;
@@ -68,6 +104,7 @@
     }
     [self _addLine];
 }
+
 
 - (void)dimissPopView {
     if (self.popupView.superview) {

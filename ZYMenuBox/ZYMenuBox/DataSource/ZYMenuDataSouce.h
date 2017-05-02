@@ -15,8 +15,9 @@ typedef NS_ENUM(NSUInteger, ZYMenuDataSouceType) {
 
 @interface ZYMenuDataSouce : NSObject
 
-/** 价格数据 */
+/** 初始化数据 */
 + (NSMutableArray *)getDataArray:(ZYMenuDataSouceType)type;
+
 
 
 @end

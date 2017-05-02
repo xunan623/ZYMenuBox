@@ -29,7 +29,11 @@
 @property (nonatomic, weak) id<ZYMenuViewDelegate> delegate;
 @property (nonatomic, weak) id<ZYMenuViewDataSource> dataSource;
 
+/** 加载下拉菜单数据 只能第一次加载时候用 */
 - (void)reload;
 - (void)dimissPopView;
+
+/** 刷新对应标题 */
+- (void)reloadTitle;
 
 @end

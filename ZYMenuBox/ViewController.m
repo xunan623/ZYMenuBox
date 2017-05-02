@@ -15,7 +15,7 @@
 #import "ZYMenuResultView.h"
 #import "ZYMenuHeader.h"
 
-@interface ViewController () <ZYMenuViewDelegate, ZYMenuViewDataSource>
+@interface ViewController () <ZYMenuViewDelegate, ZYMenuViewDataSource, ZYMenuResultViewDelegate>
 
 @property (strong, nonatomic) ZYMenuView *menuListView;
 @property (strong, nonatomic) ZYMenuResultView *resultView;
@@ -41,6 +41,7 @@
         _resultView = [[ZYMenuResultView alloc] init];
         _resultView.frame = CGRectMake(0, CGRectGetMaxY(self.menuListView.frame), kScreenWidth, 0);
         _resultView.bgColor = [UIColor colorWithHexString:MenuResultBgColor];
+        _resultView.delegate = self;
     }
     return _resultView;
 }
@@ -56,7 +57,6 @@
 - (NSMutableArray *)dataArray {
     if (!_dataArray) {
         _dataArray = [NSMutableArray array];
-        
     }
     return _dataArray;
 }
@@ -87,12 +87,20 @@
 - (void)menuView:(ZYMenuView *)menuView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSInteger)index {
     
 
-    [self.resultView setupWithArray:self.dataArray withIndex:index];
+    [self.resultView setupWithArray:array withIndex:index dataArray:self.dataArray];
     
     self.bottomView.top = CGRectGetMaxY(self.resultView.frame);
     
 }
 
+#pragma mark - ZYMenuResultViewDelegate
+
+- (void)didSelectedTagView:(NSMutableArray *)dataArray {
+
+    [self.menuListView reloadTitle];
+    
+    self.bottomView.top = CGRectGetMaxY(self.resultView.frame);
+}
 
 
 @end

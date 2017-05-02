@@ -83,6 +83,7 @@
 #pragma mark - public method
 
 - (void)addNode:(ZYItem *)node {
+    NSParameterAssert(node);
     [self.childrenNodes addObject:node];
 }
 
@@ -91,7 +92,7 @@
         return self.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath].childrenNodes[selectedPath.thirdPath].title;
     }
     if (selectedPath.secondPath != -1) {
-        return [self.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath] title];
+        return [(ZYItem *)self.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath] title];
     }
     return [self.childrenNodes[selectedPath.firstPath] title];
 

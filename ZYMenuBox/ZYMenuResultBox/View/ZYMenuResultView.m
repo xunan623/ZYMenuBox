@@ -9,6 +9,7 @@
 #import "ZYMenuResultView.h"
 #import "ZYItem.h"
 #import "ZYMenuHeader.h"
+#import "ZYDropDownView.h"
 #import "ZYMenuTagViewBtn.h"
 
 #define HORIZONTAL_PADDING 7.0f
@@ -20,6 +21,8 @@
 @interface ZYMenuResultView()
 
 @property (nonatomic, strong) NSMutableArray *itemsArray;
+@property (nonatomic, strong) NSMutableArray *titleArray;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @property (nonatomic, assign) CGRect previousFrame;
 @property (nonatomic, assign) NSInteger totalHeight;
@@ -57,34 +60,49 @@
     return _itemsArray;
 }
 
-- (void)setupWithArray:(NSMutableArray *)array withIndex:(NSInteger)index {
+- (NSMutableArray *)titleArray {
+    if (!_titleArray) {
+        _titleArray = [NSMutableArray array];
+    }
+    return _titleArray;
+}
+
+- (void)setupWithArray:(NSMutableArray *)array withIndex:(NSInteger)index dataArray:(NSMutableArray *)dataArray {
+    self.dataArray = dataArray;
+    ZYItem *rootItem = dataArray[index];
     
-    self.previousFrame = CGRectZero;
-    self.totalHeight = 0.0;
-    self.zeroLinePage = 0.0;
-    
-    
-    ZYItem *rootItem = array[index];
+    // 判重复
+    if (self.itemsArray.count) {
+        for (NSInteger i = 0; i < self.itemsArray.count; i++) {
+            ZYItem *selectedItem = self.itemsArray[i];
+            if (selectedItem == rootItem) {
+                [self.itemsArray removeObject:selectedItem];
+                [self.titleArray removeObjectAtIndex:i];
+            }
+        }
+    }
     
     NSLog(@"%@", rootItem);
     switch (rootItem.displayType) {
         case ZYPopupViewDisplayTypeNormal:
         case ZYPopupViewDisplayTypeMultilayer:{
             //拼接选择项
-//            NSMutableString *title = [NSMutableString string];
-//            __block NSInteger firstPath;
-//            [array enumerateObjectsUsingBlock:^(ZYSelectedPath * path, NSUInteger idx, BOOL * _Nonnull stop) {
-//                [title appendString:idx?[NSString stringWithFormat:@";%@",[rootItem findTitleBySelectedPath:path]]:[rootItem findTitleBySelectedPath:path]];
-//                if (idx == 0) {
-//                    firstPath = path.firstPath;
-//                }
-//            }];
-//            NSLog(@"当title为%@时，所选字段为 %@",rootItem.title ,title);
+            NSMutableString *title = [NSMutableString string];
+            __block NSInteger firstPath;
+            
+            [array enumerateObjectsUsingBlock:^(ZYSelectedPath * path, NSUInteger idx, BOOL * _Nonnull stop) {
+                [title appendString:idx?[NSString stringWithFormat:@";%@",[rootItem findTitleBySelectedPath:path]]:[rootItem findTitleBySelectedPath:path]];
+                if (idx == 0) {
+                    firstPath = path.firstPath;
+                }
+            }];
+            NSLog(@"当title为%@时，所选字段为 %@",rootItem.title ,title);
+            [self.titleArray addObject:title];
             [self.itemsArray addObject:rootItem];
             break;}
         case ZYPopupViewDisplayTypeFilters:{
             
-            [array enumerateObjectsUsingBlock:^(NSMutableArray*  _Nonnull subArray, NSUInteger idx, BOOL * _Nonnull stop) {
+            [array enumerateObjectsUsingBlock:^(NSMutableArray*  _Nonnull subArray, NSUInteger  idx, BOOL * _Nonnull stop) {
                 if (rootItem.selectedType == ZYPopupViewInputViewSelection && idx == subArray.count -1) {
                     for (ZYSelectedPath *path in subArray) {
                         ZYItem *firstItem = rootItem.childrenNodes[path.firstPath];
@@ -103,6 +121,7 @@
                     [subtitles appendString:[NSString stringWithFormat:@"  %@", secondItem.title]];
                 }
                 NSLog(@"当title为%@时，所选字段为 %@",title,subtitles);
+                [self.titleArray addObject:title];
                 [self.itemsArray addObject:rootItem];
             }];
             
@@ -111,25 +130,39 @@
             break;
     }
     
+    // 刷新view
+    [self reloadTagView];
+    
+
+}
+
+- (void)reloadTagView {
+    self.previousFrame = CGRectZero;
+    self.totalHeight = 0.0;
+    self.zeroLinePage = 0.0;
     for (UIButton *btn in self.subviews) {
         [btn removeFromSuperview];
     }
+    self.height = self.totalHeight;
     
     [self.itemsArray enumerateObjectsUsingBlock:^(ZYItem *item, NSUInteger idx, BOOL *stop) {
-        [self setupBtnWithNSString:item];
+        [self setupBtnWithNSString:item tag:idx];
     }];
 }
 
-- (void)setupBtnWithNSString:(ZYItem *)item {
+- (void)setupBtnWithNSString:(ZYItem *)item tag:(NSInteger)tag {
     //初始化按钮
     self.tagBtn = [[ZYMenuTagViewBtn alloc] init];
-    [self.tagBtn setTitle:item.title forState:UIControlStateNormal];
+    
+    [self.tagBtn setTitle:self.titleArray[tag] forState:UIControlStateNormal];
+    
+    self.tagBtn.tag = tag;
     
     //设置方法
     [self.tagBtn addTarget:self action:@selector(clickHandle:) forControlEvents:UIControlEventTouchUpInside];
     
     NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:MenuResultViewTagFontSize]};
-    CGSize StrSize = [item.title sizeWithAttributes:attribute];
+    CGSize StrSize = [self.titleArray[tag] sizeWithAttributes:attribute];
     StrSize.width += HORIZONTAL_PADDING  * 2;
     StrSize.height += VERTICAL_PADDING *2;
     ///新的 SIZE
@@ -164,11 +197,55 @@
     self.backgroundColor = bgColor;
 }
 
-#pragma mark==========按钮的处理方法
+#pragma mark - 按钮的处理方法
 
-///按钮的处理方法
 - (void)clickHandle:(UIButton *)sender{
-    NSLog(@"点击了，点解了");
+    ZYItem *rootItem = self.itemsArray[sender.tag];
+    [self.itemsArray removeObjectAtIndex:sender.tag];
+    [self.titleArray removeObjectAtIndex:sender.tag];
+    [self reloadTagView];
+    
+    for (ZYItem *item in self.dataArray) {
+        if (item == rootItem) {
+            item.title = rootItem.title;
+            switch (item.displayType) {
+                case ZYPopupViewDisplayTypeNormal: {
+                    for (NSInteger i =0; i<item.childrenNodes.count; i++) {
+                        ZYItem *subItem = item.childrenNodes[i];
+                        subItem.isSelected = (i==0) ? YES : NO;
+                    }
+                    break;}
+                case ZYPopupViewDisplayTypeMultilayer:{
+                    
+                    for (NSInteger i =0; i<item.childrenNodes.count; i++) {
+                        ZYItem *item_A = item.childrenNodes[i];
+                        item_A.isSelected = (i==0);
+                        for (NSInteger j =0; j < item_A.childrenNodes.count; j++) {
+                            ZYItem *subItemB = item_A.childrenNodes[j];
+                            subItemB.isSelected = NO;
+                        }
+                        for (NSInteger k =0; k< item_A.childrenNodes.count; k++) {
+                            ZYItem *item = item_A.childrenNodes[k];
+                            item.isSelected = (i == 0 && k ==0);
+                        }
+                    }
+                    break;}
+                case ZYPopupViewDisplayTypeFilters:{
+                    
+                    
+                    
+                    break;}
+                default:
+                    break;
+            }
+
+        }
+    }
+    
+    
+    if ([self.delegate respondsToSelector:@selector(didSelectedTagView:)]) {
+        [self.delegate didSelectedTagView:self.dataArray];
+    }
 }
 
 
