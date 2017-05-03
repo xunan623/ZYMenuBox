@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZYItem.h"
+#import "ZYSelectedPath.h"
 @interface ZYMenuTagViewBtn : UIButton
+
+@property (nonatomic, strong) ZYItem *item;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) ZYSelectedPath *keyPath;
 
 @end

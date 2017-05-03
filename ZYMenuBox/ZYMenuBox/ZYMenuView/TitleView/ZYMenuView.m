@@ -41,6 +41,7 @@
     }
     return self;
 }
+
 - (void)reloadTitle {
     
     for (NSInteger i =0; i< self.dropDownViewArray.count; i++) {

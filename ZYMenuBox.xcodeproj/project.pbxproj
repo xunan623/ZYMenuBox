@@ -30,6 +30,7 @@
 		711866081EAF618500A555E4 /* ZYBasePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 711866071EAF618500A555E4 /* ZYBasePopupView.m */; };
 		7118660B1EAF63B800A555E4 /* ZYSingleFitlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7118660A1EAF63B800A555E4 /* ZYSingleFitlerView.m */; };
 		711866111EAF63E700A555E4 /* ZYCombinationFitlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 711866101EAF63E700A555E4 /* ZYCombinationFitlerView.m */; };
+		711F47CC1EB9C8B30004D965 /* ZYNumberStringTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 711F47CB1EB9C8B30004D965 /* ZYNumberStringTool.m */; };
 		7140808F1EB08B3E00080F73 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7140808D1EB08B3E00080F73 /* area.plist */; };
 		714080901EB08B3E00080F73 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7140808E1EB08B3E00080F73 /* city.plist */; };
 		715E7E2B1EB310E100A5E247 /* ZYMenuResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 715E7E2A1EB310E100A5E247 /* ZYMenuResultView.m */; };
@@ -89,6 +90,8 @@
 		7118660A1EAF63B800A555E4 /* ZYSingleFitlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSingleFitlerView.m; sourceTree = "<group>"; };
 		7118660F1EAF63E700A555E4 /* ZYCombinationFitlerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCombinationFitlerView.h; sourceTree = "<group>"; };
 		711866101EAF63E700A555E4 /* ZYCombinationFitlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCombinationFitlerView.m; sourceTree = "<group>"; };
+		711F47CA1EB9C8B30004D965 /* ZYNumberStringTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYNumberStringTool.h; sourceTree = "<group>"; };
+		711F47CB1EB9C8B30004D965 /* ZYNumberStringTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYNumberStringTool.m; sourceTree = "<group>"; };
 		7140808D1EB08B3E00080F73 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		7140808E1EB08B3E00080F73 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		715E7E291EB310E100A5E247 /* ZYMenuResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuResultView.h; sourceTree = "<group>"; };
@@ -350,9 +353,19 @@
 			path = SingleFilterView;
 			sourceTree = "<group>";
 		};
+		711F47C91EB9C8900004D965 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				711F47CA1EB9C8B30004D965 /* ZYNumberStringTool.h */,
+				711F47CB1EB9C8B30004D965 /* ZYNumberStringTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
 		715E7E271EB3100C00A5E247 /* ZYMenuResultBox */ = {
 			isa = PBXGroup;
 			children = (
+				711F47C91EB9C8900004D965 /* Tool */,
 				716AA5DB1EB4D6F4002EC350 /* Resource */,
 				715E7E281EB3101D00A5E247 /* View */,
 			);
@@ -486,6 +499,7 @@
 				711866111EAF63E700A555E4 /* ZYCombinationFitlerView.m in Sources */,
 				711865F01EAF4E2D00A555E4 /* ZYCombinationItem.m in Sources */,
 				711865EA1EAF4D7F00A555E4 /* ZYAlternativeItem.m in Sources */,
+				711F47CC1EB9C8B30004D965 /* ZYNumberStringTool.m in Sources */,
 				711865E01EAF3D9800A555E4 /* ZYItem.m in Sources */,
 				71A187A51EB1C512001096BE /* ZYCombinationCell.m in Sources */,
 				711865D31EAF12FC00A555E4 /* UIColor+ZYMenuExtension.m in Sources */,

@@ -64,7 +64,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setAutoresizesSubviews:YES];
     
     [self.view addSubview:self.menuListView];
     [self.view addSubview:self.resultView];
@@ -85,7 +84,6 @@
 }
 
 - (void)menuView:(ZYMenuView *)menuView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSInteger)index {
-    
 
     [self.resultView setupWithArray:array withIndex:index dataArray:self.dataArray];
     
@@ -95,8 +93,9 @@
 
 #pragma mark - ZYMenuResultViewDelegate
 
-- (void)didSelectedTagView:(NSMutableArray *)dataArray {
+- (void)didSelectedTagView {
 
+    // 刷新标题
     [self.menuListView reloadTitle];
     
     self.bottomView.top = CGRectGetMaxY(self.resultView.frame);

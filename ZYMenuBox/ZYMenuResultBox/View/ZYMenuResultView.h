@@ -12,7 +12,7 @@
 
 @protocol ZYMenuResultViewDelegate <NSObject>
 
-- (void)didSelectedTagView:(NSMutableArray *)dataArray;
+- (void)didSelectedTagView;
 
 @end
 

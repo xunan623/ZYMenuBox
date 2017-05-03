@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface ZYSelectedPath : NSObject
 
 @property (nonatomic, assign) NSInteger firstPath;

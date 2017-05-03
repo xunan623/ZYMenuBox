@@ -33,14 +33,24 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "515409709.424539"
+            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/PopupView/CombinationFilerView/ZYCombinationFitlerView.m"
+            timestampString = "515420506.161405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
-            landmarkName = "-popupView:didSelectedItemsPackagingInArray:atIndex:"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "-_resetValue"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "1"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -49,13 +59,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "515409709.424539"
+            filePath = "ZYMenuBox/ZYMenuResultBox/View/ZYMenuResultView.m"
+            timestampString = "515501359.332531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-didTapDropDownView:atIndex:"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-clickHandle:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
