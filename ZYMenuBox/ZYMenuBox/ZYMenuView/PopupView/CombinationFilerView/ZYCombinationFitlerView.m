@@ -10,6 +10,9 @@
 #import "ZYCombinationCell.h"
 #import "ZYCombTextFieldCell.h"
 
+#define CLEAR_TopMarin 5.0f
+#define CLEAR_ButtonWidth 100.0f
+
 @interface ZYCombinationFitlerView()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, ZYCombinationCellDelegate, ZYCombTextFieldCellDelegate>
 
 @property (strong, nonatomic) UIView *bottomView;
@@ -95,14 +98,24 @@
         
         NSArray *titleArray = @[@"清除", @"确定"];
         for (NSInteger i = 0; i < titleArray.count; i++) {
-            CGFloat left =( (i==0) ? ButtonHorizontalMargin : self.width - ButtonHorizontalMargin - 100);
             UIColor *titleColor = ((i == 0)?[UIColor blackColor]:[UIColor colorWithHexString:titleSelectedColor]);
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake(left, 0, 100, PopupViewTabBarHeight);
             button.tag = i;
             [button setTitle:titleArray[i] forState:UIControlStateNormal];
             [button setTitleColor:titleColor forState:UIControlStateNormal];
             button.titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
+            if (i == 0) {
+                button.frame = CGRectMake(ButtonHorizontalMargin, CLEAR_TopMarin, CLEAR_ButtonWidth, PopupViewTabBarHeight - 2 * CLEAR_TopMarin);
+                button.layer.borderColor = [UIColor colorWithHexString:CombinationSelectedColor].CGColor;
+                button.layer.borderWidth = 1.f / scale;
+            }
+            if (i == 1) {
+                button.frame = CGRectMake(ButtonHorizontalMargin + CLEAR_ButtonWidth + ButtonHorizontalMargin, CLEAR_TopMarin, self.width - 3 * ButtonHorizontalMargin - CLEAR_ButtonWidth, PopupViewTabBarHeight - 2 * CLEAR_TopMarin);
+
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                button.backgroundColor = [UIColor colorWithHexString:CombinationSelectedColor];
+            }
+            button.layer.cornerRadius = 4.0f;
             [button addTarget:self action:@selector(respondsToButtonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self.bottomView addSubview:button];
 

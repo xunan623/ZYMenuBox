@@ -39,6 +39,8 @@ static  NSString *UnselectedBGColor = @"FFFFFF";
 
 //ZYCombinationFitlerView
 static NSString *CombinationBottomBGColor = @"FFFFFF";
+static NSString *CombinationSelectedColor = @"FF634D";
+static NSString *ComBinationItemSelectedBgColor = @"FEF3F1";
 static const CGFloat AlternativeTitleVerticalMargin = 10.0f;
 static const CGFloat AlternativeTitleHeight = 31.0f;
 

@@ -46,10 +46,10 @@
         button.titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
         button.layer.borderWidth = 1.0/scale;
         button.tag = i;
-        button.layer.borderColor = [UIColor colorWithHexString:@"e8e8e8"].CGColor;
+        button.layer.borderColor = subItem.isSelected ? [UIColor colorWithHexString:titleSelectedColor].CGColor : [UIColor colorWithHexString:@"e8e8e8"].CGColor;
         [button setTitle:subItem.title forState:UIControlStateNormal];
-        [button setTitleColor:subItem.isSelected?[UIColor whiteColor]:[UIColor blackColor] forState:UIControlStateNormal];
-        button.backgroundColor = subItem.isSelected?[UIColor colorWithHexString:titleSelectedColor]:[UIColor whiteColor];
+        [button setTitleColor:subItem.isSelected?[UIColor colorWithHexString:titleSelectedColor]:[UIColor blackColor] forState:UIControlStateNormal];
+        button.backgroundColor = subItem.isSelected?[UIColor colorWithHexString:ComBinationItemSelectedBgColor]:[UIColor whiteColor];
         [button addTarget:self action:@selector(respondsToButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
     }
