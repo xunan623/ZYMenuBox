@@ -14,6 +14,7 @@
 @protocol ZYCombTextFieldCellDelegate <NSObject>
 
 - (void)comTextFieldCell:(ZYCombTextFieldCell *)cell changeTextField:(UITextField *)textField;
+- (void)comTextFieldCell:(ZYCombTextFieldCell *)cell beginEdited:(UITextField *)textField;
 
 @end
 

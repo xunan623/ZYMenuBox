@@ -10,7 +10,7 @@
 #import "ZYCombinationCell.h"
 #import "ZYCombTextFieldCell.h"
 
-@interface ZYCombinationFitlerView()<UITableViewDelegate, UITableViewDataSource, ZYCombinationCellDelegate>
+@interface ZYCombinationFitlerView()<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, ZYCombinationCellDelegate, ZYCombTextFieldCellDelegate>
 
 @property (strong, nonatomic) UIView *bottomView;
 
@@ -56,6 +56,14 @@
     self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
+    UITapGestureRecognizer *tapTableView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)];
+    [self.mainTableView addGestureRecognizer:tapTableView];
+    
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)];
+    swipeGesture.direction=UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionUp;
+
+    swipeGesture.delegate=self;
+    [self.mainTableView addGestureRecognizer:swipeGesture];
     
     [self.mainTableView registerClass:[ZYCombTextFieldCell class] forCellReuseIdentifier:TextFieldCellID];
     [self.mainTableView registerClass:[ZYCombinationCell class] forCellReuseIdentifier:MainCellID];
@@ -177,29 +185,49 @@
     }];
 }
 
-
-
 // 重置
 - (void)_resetValue {
     [self _clearItemsStateOfSelectedArray];
-    [self.temporaryArray enumerateObjectsUsingBlock:^(NSMutableArray *subArray, NSUInteger idx, BOOL * _Nonnull stop) {
-        ZYSelectedPath *resetPath = [ZYSelectedPath pathWithFirstPath:idx secondPath:0];
-        ZYItem *lastItem = self.item.childrenNodes[resetPath.firstPath].childrenNodes[resetPath.secondPath];
-        lastItem.isSelected = YES;
-        [self.selectedArray[idx] addObject:resetPath];
-    }];
+//    [self.temporaryArray enumerateObjectsUsingBlock:^(NSMutableArray *subArray, NSUInteger idx, BOOL * _Nonnull stop) {
+//        ZYSelectedPath *resetPath = [ZYSelectedPath pathWithFirstPath:idx secondPath:0];
+//        ZYItem *lastItem = self.item.childrenNodes[resetPath.firstPath].childrenNodes[resetPath.secondPath];
+//        lastItem.isSelected = YES;
+//        if (idx != self.temporaryArray.count -1) {
+//            [self.selectedArray[idx] addObject:resetPath];
+//        } else {
+//            
+//            // 清除
+//            for (NSInteger i = 0; i< 2; i++) {
+//                ZYSelectedPath *resetPath = [ZYSelectedPath pathWithFirstPath:idx secondPath:i];
+//                ZYItem *lastItem = self.item.childrenNodes[resetPath.firstPath].childrenNodes[resetPath.secondPath];
+//                lastItem.isSelected = NO;
+//                lastItem.title = @"";
+//            }
+//        }
+//        
+//    }];
     [self.mainTableView reloadData];
 }
 
 
 
 #pragma mark - Action
+
+- (void)tapTableView:(id)gestue {
+    [self endEditing:YES];
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer*)otherGestureRecognizer{
+    return YES;
+}
+
 - (void)respondsToTapGestureRecognizer:(UITapGestureRecognizer *)tapGestureRecognizer {
     [self dismiss];
 }
 
 
 - (void)respondsToButtonAction:(UIButton *)sender {
+    [self endEditing:YES];
     if (sender.tag == 0) { // 重置
         [self _resetValue];
     }
@@ -231,6 +259,7 @@
     if (item.selectedType == ZYPopupViewInputViewSelection) { // 输入框
         ZYCombTextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:TextFieldCellID forIndexPath:indexPath];
         cell.item = self.item.childrenNodes[indexPath.row];
+        cell.delegate = self;
         return cell;
     } else { // 单选多选
         ZYCombinationCell *cell = [tableView dequeueReusableCellWithIdentifier:MainCellID forIndexPath:indexPath];
@@ -244,7 +273,9 @@
     return [self.item.combinationLayout.cellLayoutTotalHeight[indexPath.row] floatValue];
 }
 
+
 #pragma mark - ZYCombinationCellDelegate
+
 - (void)combineCell:(ZYCombinationCell *)combineCell didSelectedAtIndex:(NSInteger)index {
     NSIndexPath *indexPath = [self.mainTableView indexPathForCell:combineCell];
     NSInteger indexOfSelectedArray = [self _indexOfSelectedArrayByPath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index]];
@@ -279,7 +310,31 @@
     [self.mainTableView reloadData];
 }
 
+#pragma mark - ZYCombTextFieldCellDelegate
 
+- (void)comTextFieldCell:(ZYCombTextFieldCell *)cell changeTextField:(UITextField *)textField {
+    [self.mainTableView setContentOffset:CGPointMake(0, self.mainTableView.contentSize.height -self.mainTableView.height) animated:YES];
+    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
+    // 输入框会在index为last的数组里面
+    NSMutableArray *itemArray = self.selectedArray.lastObject;
+    NSInteger index = textField.tag / 100;
+    NSLog(@"%@, %zd", itemArray, index);
+    
+    if ([self _iscontainsSelectedPath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index] sourceArray:itemArray]) {
+        if (itemArray.count == 1) return;
+        ZYSelectedPath *removeIndexPath = [self _removePath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index] sourceArray:itemArray];
+        self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = NO;
+        self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].title = textField.text;
 
+    }else {
+        self.item.childrenNodes[indexPath.row].childrenNodes[index].isSelected = YES;
+        self.item.childrenNodes[indexPath.row].childrenNodes[index].title = textField.text;
+        [itemArray addObject:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index]];
+    }
+}
+- (void)comTextFieldCell:(ZYCombTextFieldCell *)cell beginEdited:(UITextField *)textField {
+    [self.mainTableView setContentOffset:CGPointMake(0, 250) animated:YES];
+
+}
 
 @end

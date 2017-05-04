@@ -15,6 +15,9 @@
 @property (strong, nonatomic) UIView *centerView;
 @property (strong, nonatomic) UIView *centerLine;
 
+@property (strong, nonatomic) UITextField *lowFloorField;
+@property (strong, nonatomic) UITextField *highFloorField;
+
 @end
 
 @implementation ZYCombTextFieldCell
@@ -32,9 +35,22 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+
+    
+}
+
+- (void)setupUI {
+    [self addSubview:self.titleLabel];
+    [self addSubview:self.centerView];
+    [self.centerView addSubview:self.centerLine];
+    
     self.titleLabel.frame = CGRectMake(ItemHorizontalMargin, TitleVerticalMargin, self.width - ItemHorizontalMargin , TitleHeight);
-    self.centerView.frame = CGRectMake(ItemHorizontalMargin, self.titleLabel.height + 10 + self.titleLabel.top, kScreenWidth - 2 * ItemHorizontalMargin, ComTextFieldCenterViewH);    
+    self.centerView.frame = CGRectMake(ItemHorizontalMargin, self.titleLabel.height + 10 + self.titleLabel.top, kScreenWidth - 2 * ItemHorizontalMargin, ComTextFieldCenterViewH);
     self.centerLine.frame = CGRectMake(self.centerView.width/2 - 8, self.centerView.height/2 , 16, 1);
+    
+    for (UIView *subView in self.centerView.subviews) {
+        [subView removeFromSuperview];
+    }
     
     NSInteger count = 2;
     for (NSInteger i = 0; i< count; i++) {
@@ -53,12 +69,14 @@
         textField.keyboardType = UIKeyboardTypePhonePad;
         textField.tag = i * 100;
         [textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
-
+        
         textField.delegate = self;
         if (i == 0) {
             bgView.frame = CGRectMake(0, 0, self.centerView.width/2 - 20, ComTextFieldCenterViewH);
+            self.lowFloorField = textField;
         } else {
             bgView.frame = CGRectMake(kScreenWidth/2 + 10, 0, self.centerView.width/2 - 20, ComTextFieldCenterViewH);
+            self.highFloorField = textField;
         }
         textField.frame = CGRectMake(bgView.left + 10, 0, bgView.width - 30, ComTextFieldCenterViewH);
         textField.placeholder = @"不限";
@@ -66,13 +84,6 @@
         [self.centerView addSubview:textField];
         
     }
-    
-}
-
-- (void)setupUI {
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.centerView];
-    [self.centerView addSubview:self.centerLine];
 }
 
 - (void)setItem:(ZYItem *)item {
@@ -83,6 +94,8 @@
     if (self.titleLabel.superview == nil) {
         [self addSubview:self.titleLabel];
     }
+    self.lowFloorField.text = item.childrenNodes[0].title;
+    self.highFloorField.text = item.childrenNodes[1].title;
 }
 
 #pragma mark - Setting & Getting
@@ -122,6 +135,27 @@
         default:
             break;
     }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([self.delegate  respondsToSelector:@selector(comTextFieldCell:beginEdited:)]) {
+        [self.delegate comTextFieldCell:self beginEdited:textField];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+
+    if ([self.delegate respondsToSelector:@selector(comTextFieldCell:changeTextField:)]) {
+        [self.delegate comTextFieldCell:self changeTextField:textField];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)sender {
+    
+    // 交出第一响应者
+    [sender resignFirstResponder];
+    
+    return YES;
 }
 
 @end
