@@ -49,27 +49,22 @@
         ZYItem *item = self.itemArray[i];
         switch (item.displayType) {
             case ZYPopupViewDisplayTypeNormal: {
-                for (NSInteger i =0; i<item.childrenNodes.count; i++) {
-                    ZYItem *subItem = item.childrenNodes[i];
-                    if (i == 0 && subItem.isSelected == YES) {
+                for (NSInteger j =0; j<item.childrenNodes.count; j++) {
+                    ZYItem *subItem = item.childrenNodes[j];
+                    if (j == 0 && subItem.isSelected == YES) {
                         [dropMenu updateTitleContent:item.title];
                     }
                 }
                 break;}
             case ZYPopupViewDisplayTypeMultilayer:{
-                
-                for (NSInteger i =0; i<item.childrenNodes.count; i++) {
-                    ZYItem *subItem = item.childrenNodes[i];
-                    for (NSInteger j =0; j < subItem.childrenNodes.count; j++) {
-                        ZYItem *subItemB = subItem.childrenNodes[j];
-                        if (i== 0 && j==0 && subItemB.isSelected == YES && subItem.isSelected == YES) {
-                            [dropMenu updateTitleContent:item.title];
-                        }
+                for (NSInteger n =0; n<item.childrenNodes.count; n++) {
+                    ZYItem *subItem = item.childrenNodes[n];
+                    if (n== 0 && subItem.isSelected == YES) {
+                        [dropMenu updateTitleContent:item.title];
                     }
                 }
                 break;}
             case ZYPopupViewDisplayTypeFilters:{
-                
                 
                 break;}
             default:
@@ -160,14 +155,21 @@
     //混合类型不做UI赋值操作 直接将item的路径回调回去就好了
     if (item.displayType == ZYPopupViewDisplayTypeMultilayer || item.displayType == ZYPopupViewDisplayTypeNormal) {
         // 更新选项卡标题
+        __block NSInteger selectedPath = -1;
         NSMutableString *title = [NSMutableString string];
         for (int i = 0; i <array.count; i++) {
             ZYSelectedPath *path = array[i];
             [title appendString:i?[NSString stringWithFormat:@";%@",[item findTitleBySelectedPath:path]]:[item findTitleBySelectedPath:path]];
+            selectedPath = path.firstPath;
         }
         ZYDropDownView *box = self.dropDownViewArray[index];
-        //UI赋值操作
-        [box updateTitleContent:title];
+        
+        // UI赋值操作 其中如果是选中的第一个数据 则title 为默认值
+        if (selectedPath == 0) {
+            [box updateTitleContent:item.title];
+        } else {
+            [box updateTitleContent:title];
+        }
     };
     
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectedItemsPackagingInArray:atIndex:)]) {

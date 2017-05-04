@@ -110,6 +110,10 @@
                 ZYItem *keyItem = self.dataArray[[key integerValue]];
                 for (NSInteger j = 0; j < keyPathArray.count; j++) {
                     ZYSelectedPath *keyPath = keyPathArray[j];
+#pragma mark - TODO 这里是选中默认的功能 这里要返回到接口中清除请求参数
+                    if (keyPath.firstPath == 0) {
+                        break;
+                    }
                     [self setupBtnWithNSString:[keyItem findTitleBySelectedPath:keyPath]
                                       withItem:keyItem
                                          index:[key integerValue]

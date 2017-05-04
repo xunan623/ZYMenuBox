@@ -310,9 +310,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ZYSelectedPath *selectdPath = [self.selectedArray lastObject];
+
     switch (tableView.tag) {
         case 0:{
-            if ([self _getFirstLayerIndex] == indexPath.row) return;
+        
+            // 上一次选中的记录下来 这里删除了
+            if ([self _getFirstLayerIndex] == indexPath.row && indexPath.row != 0) return;
+
             //清除之前的选中状态
             [self _resetSelectePath:selectdPath isSelected:NO];
             
@@ -332,7 +336,9 @@
             }else {
                 [self _animatonWhenSelectRowWithTargetTableViewTag:tableView.tag];
             }
-            
+            // 当点击全部的时候返回
+            if (indexPath.row == 0) [self _callBackDelegate];
+
             break;}
         case 1:{
             
