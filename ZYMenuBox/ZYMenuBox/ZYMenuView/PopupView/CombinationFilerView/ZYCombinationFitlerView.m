@@ -56,21 +56,7 @@
     [rootView addSubview:self];
     
     // 添加tableView
-    self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
-    self.mainTableView.delegate = self;
-    self.mainTableView.dataSource = self;
-    UITapGestureRecognizer *tapTableView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)];
-    [self.mainTableView addGestureRecognizer:tapTableView];
-    
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)];
-    swipeGesture.direction=UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionUp;
-
-    swipeGesture.delegate=self;
-    [self.mainTableView addGestureRecognizer:swipeGesture];
-    
-    [self.mainTableView registerClass:[ZYCombTextFieldCell class] forCellReuseIdentifier:TextFieldCellID];
-    [self.mainTableView registerClass:[ZYCombinationCell class] forCellReuseIdentifier:MainCellID];
-    [self addSubview:self.mainTableView];
+    [self addSubview:[self viewWithTableView]];
     
     // 背景视图
     self.shadowView.frame = CGRectMake(0, top, kScreenWidth, kScreenHeigth - top);
@@ -121,6 +107,28 @@
 
         }
     }];
+}
+
+#pragma mark - Getting & Setting 
+
+
+- (UITableView *)viewWithTableView {
+    
+    self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+    self.mainTableView.delegate = self;
+    self.mainTableView.dataSource = self;
+    UITapGestureRecognizer *tapTableView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)];
+    [self.mainTableView addGestureRecognizer:tapTableView];
+    
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)];
+    swipeGesture.direction=UISwipeGestureRecognizerDirectionDown | UISwipeGestureRecognizerDirectionUp;
+    
+    swipeGesture.delegate=self;
+    [self.mainTableView addGestureRecognizer:swipeGesture];
+    
+    [self.mainTableView registerClass:[ZYCombTextFieldCell class] forCellReuseIdentifier:TextFieldCellID];
+    [self.mainTableView registerClass:[ZYCombinationCell class] forCellReuseIdentifier:MainCellID];
+    return self.mainTableView;
 }
 
 - (void)dismiss {

@@ -183,20 +183,25 @@
 - (void)_resetSelectePath:(ZYSelectedPath *)selectdPath isSelected:(BOOL)isSelected {
     self.item.childrenNodes[selectdPath.firstPath].isSelected = isSelected;
     if (selectdPath.secondPath == -1) return;
+    if (selectdPath == nil) return;
     self.item.childrenNodes[selectdPath.firstPath].childrenNodes[selectdPath.secondPath].isSelected = isSelected;
     if (selectdPath.thirdPath == -1) return;
+    if (selectdPath == nil) return;
     self.item.childrenNodes[selectdPath.firstPath].childrenNodes[selectdPath.secondPath].childrenNodes[selectdPath.thirdPath].isSelected = isSelected;
 }
 
 - (void)_resetFromSecondPath:(ZYSelectedPath *)selectdPath isSelected:(BOOL)isSelected {
     if (selectdPath.secondPath == -1) return;
+    if (selectdPath == nil) return;
     self.item.childrenNodes[selectdPath.firstPath].childrenNodes[selectdPath.secondPath].isSelected = isSelected;
     if (selectdPath.thirdPath == -1) return;
+    if (selectdPath == nil) return;
     self.item.childrenNodes[selectdPath.firstPath].childrenNodes[selectdPath.secondPath].childrenNodes[selectdPath.thirdPath].isSelected = isSelected;
 }
 
 - (void)_resetFromThirdPath:(ZYSelectedPath *)selectdPath isSelected:(BOOL)isSelected {
     if (selectdPath.thirdPath == -1) return;
+    if (selectdPath == nil) return;
     self.item.childrenNodes[selectdPath.firstPath].childrenNodes[selectdPath.secondPath].childrenNodes[selectdPath.thirdPath].isSelected = isSelected;
 }
 

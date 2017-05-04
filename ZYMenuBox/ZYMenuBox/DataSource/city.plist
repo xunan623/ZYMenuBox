@@ -4,6 +4,22 @@
 <array>
 	<dict>
 		<key>CITY_CODE</key>
+		<string>0</string>
+		<key>CREATED_BY</key>
+		<string>全部</string>
+		<key>CREATED_TIME</key>
+		<string>0</string>
+		<key>DISTRICT_NAME</key>
+		<string>0</string>
+		<key>PKID</key>
+		<string>0</string>
+		<key>UPDATED_BY</key>
+		<string>0</string>
+		<key>UPDATED_TIME</key>
+		<string>0</string>
+	</dict>
+	<dict>
+		<key>CITY_CODE</key>
 		<string>310000</string>
 		<key>CREATED_BY</key>
 		<string>黄浦区</string>
