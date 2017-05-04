@@ -60,7 +60,7 @@
             for (NSInteger j = 0; j < count; j++) {
                 NSString *title = [itemDict.allValues lastObject][j];
                 ZYItem *item5_B = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:title];
-                if (j == 0) item5_B.isSelected = YES;
+//                if (j == 0) item5_B.isSelected = YES; // 更多里面没有默认选项
                 [item5_A addNode:item5_B];
             }
         }
