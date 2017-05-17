@@ -70,6 +70,7 @@
     [self.view addSubview:self.bottomView];
     self.dataArray = [ZYMenuDataSouce getDataArray:ZYMenuDataSouceTypeRent];
     [self.menuListView reload];
+    
 
 }
 

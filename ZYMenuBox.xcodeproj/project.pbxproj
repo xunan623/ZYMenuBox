@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		711645FA1ECC2AE1009B88C5 /* ZYMenuTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 711645F91ECC2AE1009B88C5 /* ZYMenuTitleButton.m */; };
 		7118654F1EAEDA2800A555E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7118654E1EAEDA2800A555E4 /* main.m */; };
 		711865521EAEDA2800A555E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 711865511EAEDA2800A555E4 /* AppDelegate.m */; };
 		711865551EAEDA2800A555E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 711865541EAEDA2800A555E4 /* ViewController.m */; };
@@ -48,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		711645F81ECC2AE1009B88C5 /* ZYMenuTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuTitleButton.h; sourceTree = "<group>"; };
+		711645F91ECC2AE1009B88C5 /* ZYMenuTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuTitleButton.m; sourceTree = "<group>"; };
 		7118654A1EAEDA2800A555E4 /* ZYMenuBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZYMenuBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7118654E1EAEDA2800A555E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		711865501EAEDA2800A555E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -288,6 +291,8 @@
 		711865FA1EAF601300A555E4 /* TitleView */ = {
 			isa = PBXGroup;
 			children = (
+				711645F81ECC2AE1009B88C5 /* ZYMenuTitleButton.h */,
+				711645F91ECC2AE1009B88C5 /* ZYMenuTitleButton.m */,
 				711865FB1EAF601300A555E4 /* ZYDropDownView.h */,
 				711865FC1EAF601300A555E4 /* ZYDropDownView.m */,
 				711865FD1EAF601300A555E4 /* ZYMenuView.h */,
@@ -499,6 +504,7 @@
 				711866111EAF63E700A555E4 /* ZYCombinationFitlerView.m in Sources */,
 				711865F01EAF4E2D00A555E4 /* ZYCombinationItem.m in Sources */,
 				711865EA1EAF4D7F00A555E4 /* ZYAlternativeItem.m in Sources */,
+				711645FA1ECC2AE1009B88C5 /* ZYMenuTitleButton.m in Sources */,
 				711F47CC1EB9C8B30004D965 /* ZYNumberStringTool.m in Sources */,
 				711865E01EAF3D9800A555E4 /* ZYItem.m in Sources */,
 				71A187A51EB1C512001096BE /* ZYCombinationCell.m in Sources */,

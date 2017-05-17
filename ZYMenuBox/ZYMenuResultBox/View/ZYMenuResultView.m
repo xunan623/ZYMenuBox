@@ -224,7 +224,7 @@
 - (void)clickHandle:(ZYMenuTagViewBtn *)sender{
     ZYMenuTagViewBtn *btn = (ZYMenuTagViewBtn *)sender;
     
-    if (btn.index == 4) {
+    if (btn.index == 3) {
         ZYItem *keyItem = self.dataArray[btn.index];
         ZYItem *secondItem = keyItem.childrenNodes[btn.keyPath.firstPath].childrenNodes[btn.keyPath.secondPath];
         secondItem.isSelected = NO;
