@@ -120,13 +120,13 @@
                                           keyPath:keyPath];
                 }
             } else {
-                ZYItem *keyItem = self.dataArray[4];
+                ZYItem *keyItem = self.dataArray[3];
                 for (NSInteger j = 0; j < keyPathArray.count; j++) {
                     ZYSelectedPath *keyPath = keyPathArray[j];
                     ZYItem *secondItem = keyItem.childrenNodes[keyPath.firstPath].childrenNodes[keyPath.secondPath];
                     [self setupBtnWithNSString:secondItem.title
                                       withItem:keyItem
-                                         index:4
+                                         index:3
                                        keyPath:keyPath];
                 }
             }

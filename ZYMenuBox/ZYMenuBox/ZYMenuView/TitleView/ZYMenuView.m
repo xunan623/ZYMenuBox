@@ -24,9 +24,7 @@
 @property (nonatomic, strong) ZYBasePopupView *popupView;
 @property (nonatomic, assign) BOOL isAnimation;                               /*防止多次快速点击**/
 
-@property (nonatomic, strong) CALayer *topLine;
-@property (nonatomic, strong) CALayer *bottomLine;
-
+@property (nonatomic, strong) UIView *bottomLayer;
 
 @end
 
@@ -36,6 +34,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
+        self.layer.shadowOffset = CGSizeMake(0,3);//shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+        self.layer.shadowOpacity = 0.1;//阴影透明度，默认0
+        self.layer.shadowRadius = 4;//阴影半径，默认3
         self.dropDownViewArray = [NSMutableArray array];
         self.itemArray = [NSMutableArray array];
         self.symbolArray = [NSMutableArray array];
@@ -99,7 +102,6 @@
             [self.itemArray addObject:item];
         }
     }
-    [self _addLine];
 }
 
 
@@ -107,19 +109,6 @@
     if (self.popupView.superview) {
         [self.popupView dismissWithOutAnimation];
     }
-}
-
-#pragma mark - Private Method
-- (void)_addLine {
-    self.topLine = [CALayer layer];
-    self.topLine.frame = CGRectMake(0, 0 , self.width, 1.0/scale);
-    self.topLine.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.3].CGColor;
-    [self.layer addSublayer:self.topLine];
-    
-    self.bottomLine = [CALayer layer];
-    self.bottomLine.frame = CGRectMake(0, self.height - 1.0/scale , self.width, 1.0/scale);
-    self.bottomLine.backgroundColor = [UIColor colorWithHexString:@"e8e8e8"].CGColor;
-    [self.layer addSublayer:self.bottomLine];
 }
 
 #pragma mark - ZYDropDownViewDelegate
@@ -135,8 +124,8 @@
         ZYBasePopupView * lastView = self.symbolArray[0];
         [lastView dismiss];
         [self.symbolArray removeAllObjects];
-        
-    }else{
+    }
+//    }else{ // 当前选项卡打开的状态下 是否重新打开另外一个选项卡
         self.isAnimation = YES;
         ZYItem *item = self.itemArray[index];
         ZYBasePopupView *popupView = [ZYBasePopupView getSubPopupView:item];
@@ -147,7 +136,7 @@
             self.isAnimation = NO;
         }];
         [self.symbolArray addObject:popupView];
-    }
+//    }
 }
 
 #pragma mark - ZYPopupViewDelegate

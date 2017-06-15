@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "515581194.707158"
+            timestampString = "519201687.81478"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "-reloadTitle"
             landmarkType = "7">
          </BreakpointContent>

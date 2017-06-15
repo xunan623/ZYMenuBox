@@ -133,13 +133,6 @@
         default:
             break;
     }
-    
-//    for (NSInteger i = 0; i< areaCode.count; i++) {
-//        [rootItem3 addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected isSelected:(i==0 ? YES : NO)
-//                                          titleName:areaTitle[i]
-//                                       subtitleName:nil
-//                                               code:areaTitle[i]]];
-//    }
 
     // 户型
     NSArray *houseTitle = @[@"全部",@"一室",@"二室",@"三室",@"四室",@"五室",@"五室以上"];
@@ -155,7 +148,6 @@
     
     [dataArray addObject:rootItem1];
     [dataArray addObject:rootItem2];
-//    [dataArray addObject:rootItem3];
     [dataArray addObject:rootItem4];
     [dataArray addObject:rootItem5];
 
