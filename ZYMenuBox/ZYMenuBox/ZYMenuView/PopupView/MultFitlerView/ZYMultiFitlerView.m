@@ -325,9 +325,19 @@
             
             //移除
             [self.selectedArray removeAllObjects];
+
+          
+            ZYSelectedPath *tempPath =self.temporaryArray.lastObject;
             
-            //添加
-            [self.selectedArray addObject:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:-1 thirdPath:-1]];
+            if (tempPath && tempPath.firstPath == indexPath.row) {
+                self.item.childrenNodes[indexPath.row].childrenNodes[tempPath.secondPath].isSelected = YES;
+                //添加
+                [self.selectedArray addObject:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:tempPath.secondPath thirdPath:-1]];
+            } else {
+                [self.selectedArray addObject:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:-1 thirdPath:-1]];
+            }
+
+            
             
             //刷新
             if (self.item.numberOflayers == ZYPopupViewTwolayers) {
