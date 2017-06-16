@@ -47,8 +47,6 @@
     UIView *rootView = [[UIApplication sharedApplication] keyWindow];
     self.sourceFrame = frame;
     CGFloat top =  CGRectGetMaxY(self.sourceFrame) + DropDownBoxViewTopMargin;
-//    CGFloat maxHeight = kScreenHeigth - DistanceBeteewnPopupViewAndBottom - top - PopupViewTabBarHeight;
-//    CGFloat resultHeight = MIN(maxHeight, self.item.childrenNodes.count * PopupViewRowHeight);
     CGFloat resultHeight = DropDownBoxViewSingeHeight;
     self.frame = CGRectMake(0, top, kScreenWidth, 0);
     [rootView addSubview:self];

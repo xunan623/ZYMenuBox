@@ -65,8 +65,10 @@ static NSString *LeftTableViewCellBackgroundColor = @"0xf9fafc";
 
 // 弹出View距离dropBarTop距离
 static const CGFloat DropDownBoxViewTopMargin = 4.0f;
-// 弹出View的高度
+// 弹出View的高度 单列
 static const CGFloat DropDownBoxViewSingeHeight = 300.0f;
+// 弹出View的高度 多列
+static const CGFloat DropDownBoxViewMultiHeight = 300.0f;
 
 static const CGFloat ArrowSide = 8.0f;
 static const CGFloat ArrowToRight = 6.0f;
