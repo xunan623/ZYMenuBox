@@ -38,9 +38,10 @@
 - (void)popupViewFromSourceFrame:(CGRect)frame completion:(void (^)())completion {
     UIView *rootView = [[UIApplication sharedApplication] keyWindow];
     self.sourceFrame = frame;
-    CGFloat top =  CGRectGetMaxY(self.sourceFrame);
-    CGFloat maxHeight = kScreenHeigth - DistanceBeteewnPopupViewAndBottom - top - PopupViewTabBarHeight;
-    CGFloat resultHeight = MIN(maxHeight, MAX(self.item.childrenNodes.count, self.minRowNumber)  * PopupViewRowHeight);
+    CGFloat top =  CGRectGetMaxY(self.sourceFrame) + DropDownBoxViewTopMargin;
+//    CGFloat maxHeight = kScreenHeigth - DistanceBeteewnPopupViewAndBottom - top - PopupViewTabBarHeight;
+//    CGFloat resultHeight = MIN(maxHeight, MAX(self.item.childrenNodes.count, self.minRowNumber)  * PopupViewRowHeight);
+    CGFloat resultHeight = DropDownBoxViewSingeHeight;
     self.frame = CGRectMake(0, top, kScreenWidth, 0);
     [rootView addSubview:self];
     
@@ -63,6 +64,7 @@
                 [tableView registerClass:[ZYMenuLeftCell class] forCellReuseIdentifier:MainCellID];
             }else {
                 [tableView registerClass:[ZYNormalCell class] forCellReuseIdentifier:SubCellID];
+                tableView.backgroundColor = [UIColor colorWithHexString:LeftTableViewCellBackgroundColor];
             }
         }
         
@@ -82,7 +84,7 @@
     [self.shadowView addGestureRecognizer:tap];
     
     //出现的动画
-    LeftCellWidth  = (self.item.numberOflayers == ZYPopupViewThreelayers)?kScreenWidth/3:100.0f;
+    LeftCellWidth  = (self.item.numberOflayers == ZYPopupViewThreelayers)?kScreenWidth/3:124.0f;
     [UIView animateWithDuration:AnimationDuration animations:^{
         self.frame = CGRectMake(0, top, kScreenWidth, resultHeight);
         for (int index = 0; index < self.tableViewArrays.count; index ++) {
@@ -242,7 +244,7 @@
         }
         ZYNormalCell *cell = [tableView dequeueReusableCellWithIdentifier:SubCellID forIndexPath:indexPath];
         cell.item = self.item.childrenNodes[[self _getFirstLayerIndex]].childrenNodes[indexPath.row];
-        cell.backgroundColor = [UIColor colorWithHexString:@"F5F3F6"];
+        cell.backgroundColor = [UIColor colorWithHexString:LeftTableViewCellBackgroundColor];
         return cell;
     }
     

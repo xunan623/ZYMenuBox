@@ -8,11 +8,10 @@
 
 #import "ZYNormalCell.h"
 #import "ZYMenuHeader.h"
-static const CGFloat horizontalMargin = 10.0f;
+static const CGFloat horizontalMargin = 20.0f;
 @interface ZYNormalCell()
 
 @property (nonatomic, strong) UILabel *title;
-@property (nonatomic, strong) CALayer *bottomLine;
 
 @end
 
@@ -25,7 +24,6 @@ static const CGFloat horizontalMargin = 10.0f;
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.title.frame = CGRectMake(horizontalMargin, 0, 100, self.height);
-    self.bottomLine.frame = CGRectMake(0, self.height - .5 , self.width, .5);
 }
 
 - (void)setItem:(ZYItem *)item {
@@ -33,7 +31,6 @@ static const CGFloat horizontalMargin = 10.0f;
     self.title.text = item.title;
     self.title.textColor = item.isSelected?[UIColor colorWithHexString:titleSelectedColor]:[UIColor colorWithHexString:DropDownBoxNormalColor];
 
-    self.backgroundColor = item.isSelected?[UIColor colorWithHexString:SelectedBGColor]:[UIColor colorWithHexString:UnselectedBGColor];
 }
 
 #pragma mark - get
@@ -47,13 +44,5 @@ static const CGFloat horizontalMargin = 10.0f;
     return _title;
 }
 
-- (CALayer *)bottomLine {
-    if (!_bottomLine) {
-        _bottomLine = [CALayer layer];
-        _bottomLine.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.2].CGColor;
-        [self.layer addSublayer:_bottomLine];
-    }
-    return _bottomLine;
-}
 
 @end

@@ -19,7 +19,7 @@ static const CGFloat  ButtonFontSize = 12.0f;
 static const CGFloat PopupViewRowHeight = 44.0f;
 static const CGFloat DistanceBeteewnPopupViewAndBottom =80.0f;
 static const CGFloat PopupViewTabBarHeight = 40.0f;
-static const CGFloat LeftCellHorizontalMargin = 10.0f;
+static const CGFloat LeftCellHorizontalMargin = 20.0f;
 static CGFloat LeftCellWidth = 100.0f;
 static const CGFloat ShadowAlpha = 0.5;
 //static const CGFloat
@@ -59,6 +59,14 @@ static const CGFloat ComTextFieldCenterViewH = 35.0f;
 static const CGFloat DropDownBoxFontSize = 14.0f;
 static NSString *DropDownBoxSelectedColor = @"FF0000";
 static NSString *DropDownBoxNormalColor = @"9398AA";
+
+// 左边列表颜色
+static NSString *LeftTableViewCellBackgroundColor = @"0xf9fafc";
+
+// 弹出View距离dropBarTop距离
+static const CGFloat DropDownBoxViewTopMargin = 4.0f;
+// 弹出View的高度
+static const CGFloat DropDownBoxViewSingeHeight = 300.0f;
 
 static const CGFloat ArrowSide = 8.0f;
 static const CGFloat ArrowToRight = 6.0f;
