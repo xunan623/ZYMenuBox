@@ -76,40 +76,53 @@
         self.height += PopupViewTabBarHeight;
         
         // 底部按钮
-        self.bottomView = [[UIView alloc] init];
-        self.bottomView.backgroundColor = [UIColor colorWithHexString:CombinationBottomBGColor];
-        self.bottomView.frame = CGRectMake(0, self.mainTableView.bottom, self.width, PopupViewTabBarHeight);
         [self addSubview:self.bottomView];
         
-        NSArray *titleArray = @[@"清除", @"确定"];
-        for (NSInteger i = 0; i < titleArray.count; i++) {
-            UIColor *titleColor = ((i == 0)?[UIColor blackColor]:[UIColor colorWithHexString:titleSelectedColor]);
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.tag = i;
-            [button setTitle:titleArray[i] forState:UIControlStateNormal];
-            [button setTitleColor:titleColor forState:UIControlStateNormal];
-            button.titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
-            if (i == 0) {
-                button.frame = CGRectMake(ButtonHorizontalMargin, CLEAR_TopMarin, CLEAR_ButtonWidth, PopupViewTabBarHeight - 2 * CLEAR_TopMarin);
-                button.layer.borderColor = [UIColor colorWithHexString:CombinationSelectedColor].CGColor;
-                button.layer.borderWidth = 1.f / scale;
-            }
-            if (i == 1) {
-                button.frame = CGRectMake(ButtonHorizontalMargin + CLEAR_ButtonWidth + ButtonHorizontalMargin, CLEAR_TopMarin, self.width - 3 * ButtonHorizontalMargin - CLEAR_ButtonWidth, PopupViewTabBarHeight - 2 * CLEAR_TopMarin);
-
-                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                button.backgroundColor = [UIColor colorWithHexString:CombinationSelectedColor];
-            }
-            button.layer.cornerRadius = 4.0f;
-            [button addTarget:self action:@selector(respondsToButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-            [self.bottomView addSubview:button];
-
-        }
+        [self setupSubmitButton];
     }];
 }
 
-#pragma mark - Getting & Setting 
+- (void)setupSubmitButton {
+    NSArray *titleArray = @[@"清除", @"确定"];
+    for (NSInteger i = 0; i < titleArray.count; i++) {
+        UIColor *titleColor = ((i == 0)?[UIColor colorWithHexString:DropDownBoxViewClearButtonColor]:[UIColor colorWithHexString:titleSelectedColor]);
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.tag = i;
+        [button setTitle:titleArray[i] forState:UIControlStateNormal];
+        [button setTitleColor:titleColor forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:DropDownBoxViewCombinaSubmitFont];
+        if (i == 0) {
+            button.frame = CGRectMake(ButtonHorizontalMargin, CLEAR_TopMarin, CLEAR_ButtonWidth, PopupViewTabBarHeight - 2 * CLEAR_TopMarin);
+            button.layer.borderColor = [UIColor colorWithHexString:CombinationSelectedColor].CGColor;
+            button.layer.borderWidth = 1.f / scale;
+        }
+        if (i == 1) {
+            button.frame = CGRectMake(ButtonHorizontalMargin + CLEAR_ButtonWidth + ButtonHorizontalMargin, CLEAR_TopMarin, self.width - 3 * ButtonHorizontalMargin - CLEAR_ButtonWidth, PopupViewTabBarHeight - 2 * CLEAR_TopMarin);
+            
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            button.backgroundColor = [UIColor colorWithHexString:CombinationSelectedColor];
+        }
+        button.layer.cornerRadius = 4.0f;
+        [button addTarget:self action:@selector(respondsToButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.bottomView addSubview:button];
+        
+    }
+}
 
+#pragma mark - Getting & Setting
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor colorWithHexString:CombinationBottomBGColor];
+        _bottomView.frame = CGRectMake(0, self.mainTableView.bottom, self.width, PopupViewTabBarHeight);
+        _bottomView.layer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
+        _bottomView.layer.shadowOffset = CGSizeMake(3,0);
+        _bottomView.layer.shadowOpacity = 0.1;//阴影透明度，默认0
+        _bottomView.layer.shadowRadius = 4;//阴影半径，默认3
+    }
+    return _bottomView;
+}
 
 - (UITableView *)viewWithTableView {
     
