@@ -18,7 +18,7 @@ static const CGFloat  ButtonFontSize = 12.0f;
 //ZYPopupView
 static const CGFloat PopupViewRowHeight = 44.0f;
 static const CGFloat DistanceBeteewnPopupViewAndBottom =80.0f;
-static const CGFloat PopupViewTabBarHeight = 40.0f;
+static const CGFloat PopupViewTabBarHeight = 49.0f;
 static const CGFloat LeftCellHorizontalMargin = 20.0f;
 static CGFloat LeftCellWidth = 100.0f;
 static const CGFloat ShadowAlpha = 0.5;
@@ -62,6 +62,10 @@ static NSString *DropDownBoxNormalColor = @"9398AA";
 
 // 左边列表颜色
 static NSString *LeftTableViewCellBackgroundColor = @"0xf9fafc";
+// 清除按钮颜色
+static NSString *DropDownBoxViewClearButtonColor = @"ff634d";
+// 按钮字体
+static CGFloat DropDownBoxViewCombinaSubmitFont = 17.0f;
 
 // 弹出View距离dropBarTop距离
 static const CGFloat DropDownBoxViewTopMargin = 4.0f;
