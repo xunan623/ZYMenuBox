@@ -24,6 +24,8 @@
 @property (nonatomic, strong) ZYBasePopupView *popupView;
 @property (nonatomic, assign) BOOL isAnimation;                               /*防止多次快速点击**/
 
+@property (nonatomic, assign) NSInteger perviousIndex;          // 上一次点击
+
 @property (nonatomic, strong) UIView *bottomLayer;
 
 @end
@@ -42,6 +44,7 @@
         self.dropDownViewArray = [NSMutableArray array];
         self.itemArray = [NSMutableArray array];
         self.symbolArray = [NSMutableArray array];
+        self.perviousIndex = -1;
     }
     return self;
 }
@@ -114,30 +117,48 @@
 #pragma mark - ZYDropDownViewDelegate
 - (void)didTapDropDownView:(ZYDropDownView *)dropDownView atIndex:(NSUInteger)index {
     if (self.isAnimation == YES) return;
+    
+    if (self.perviousIndex != -1) {
+        if (self.perviousIndex == index) { // 当前点击和上次点击一样
+            for (int i = 0; i <self.dropDownViewArray.count; i++) {
+                ZYDropDownView *currentBox  = self.dropDownViewArray[i];
+                [currentBox updateTitleState:(i == index)];
+            }
+            ZYBasePopupView * lastView = self.symbolArray[0];
+            [lastView dismiss];
+            [self.symbolArray removeAllObjects];
+            
+            self.perviousIndex = -1;
+            return;
+        } else {
+            //点击后先判断symbolArray有没有标示
+            //移除
+            ZYBasePopupView * lastView = self.symbolArray[0];
+            [lastView dismiss];
+            [self.symbolArray removeAllObjects];
+        }
+    }
+    
     for (int i = 0; i <self.dropDownViewArray.count; i++) {
         ZYDropDownView *currentBox  = self.dropDownViewArray[i];
         [currentBox updateTitleState:(i == index)];
     }
-    //点击后先判断symbolArray有没有标示
-    if (self.symbolArray.count) {
-        //移除
-        ZYBasePopupView * lastView = self.symbolArray[0];
-        [lastView dismiss];
-        [self.symbolArray removeAllObjects];
-    }
-//    }else{ // 当前选项卡打开的状态下 是否重新打开另外一个选项卡
-        self.isAnimation = YES;
-        ZYItem *item = self.itemArray[index];
-        ZYBasePopupView *popupView = [ZYBasePopupView getSubPopupView:item];
-        popupView.delegate = self;
-        popupView.tag = index;
-        self.popupView = popupView;
-        [popupView popupViewFromSourceFrame:self.frame completion:^{
-            self.isAnimation = NO;
-        }];
-        [self.symbolArray addObject:popupView];
-//    }
+    
+    self.isAnimation = YES;
+    ZYItem *item = self.itemArray[index];
+    ZYBasePopupView *popupView = [ZYBasePopupView getSubPopupView:item];
+    popupView.delegate = self;
+    popupView.tag = index;
+    self.popupView = popupView;
+    [popupView popupViewFromSourceFrame:self.frame completion:^{
+        self.isAnimation = NO;
+    }];
+    [self.symbolArray addObject:popupView];
+    
+    self.perviousIndex = index;
+
 }
+
 
 #pragma mark - ZYPopupViewDelegate
 - (void)popupView:(ZYBasePopupView *)popupView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSUInteger)index {
@@ -168,6 +189,7 @@
 }
 
 - (void)popupViewWillDismiss:(ZYBasePopupView *)popupView {
+    self.perviousIndex = -1;
     [self.symbolArray removeAllObjects];
     for (ZYDropDownView *currentBox in self.dropDownViewArray) {
         [currentBox updateTitleState:NO];
