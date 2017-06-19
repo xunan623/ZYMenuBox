@@ -36,13 +36,24 @@
     if (self.titleLabel.superview == nil) {
         [self addSubview:self.titleLabel];
     }
+    
+    CGFloat viewWidth = kScreenWidth - CombinaButtonLeftMargin*2;
+
+    
+    CGFloat buttonWidth = (viewWidth - CombinaButtonHorizontalSpace * (CombinaRowNumber - 1)) / CombinaRowNumber;
+    
     // 放按钮
     for (NSInteger i = 0; i < item.childrenNodes.count; i++) {
+
+        
         ZYItem *subItem = item.childrenNodes[i];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        CGFloat orginX = [item.combinationLayout.cellLayoutTotalInfo[i][0] floatValue];
-        CGFloat orginy = [item.combinationLayout.cellLayoutTotalInfo[i][1] floatValue];
-        button.frame = CGRectMake(orginX, orginy, ItemWidth, ItemHeight);
+        
+        button.frame = CGRectMake((i%CombinaRowNumber)*(buttonWidth + CombinaButtonHorizontalSpace) + CombinaButtonLeftMargin,
+                                  (i/CombinaRowNumber) *(CombinaButtonHeight + CombinaButtonVerticalSpace) + CombinaTableViewHeaderHeight,
+                                  buttonWidth,
+                                  CombinaButtonHeight) ;
+
         button.titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
         button.layer.borderWidth = 1.0/scale;
         button.tag = i;
@@ -55,7 +66,10 @@
     }
     
     // layout
-    self.titleLabel.frame = CGRectMake(ItemHorizontalMargin, TitleVerticalMargin, self.width - ItemHorizontalMargin , TitleHeight);
+    self.titleLabel.frame = CGRectMake(CombinaTableViewHeaderLeftMargin,
+                                       CombinaTableViewHeaderTopMargin,
+                                       self.width - CombinaTableViewHeaderLeftMargin ,
+                                       CombinaTableViewHeaderTextLabelHeight);
 }
 
 #pragma armk - Action
@@ -69,7 +83,8 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
+        _titleLabel.font = [UIFont systemFontOfSize:CombinaTableViewHeaderTextLabelFont];
+        _titleLabel.textColor = [UIColor colorWithHexString:CombinaTableViewHeaderTextLabelColor];
     }
     return _titleLabel;
 }

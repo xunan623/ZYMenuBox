@@ -129,6 +129,7 @@
     self.mainTableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     self.mainTableView.delegate = self;
     self.mainTableView.dataSource = self;
+    self.mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UITapGestureRecognizer *tapTableView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTableView:)];
     [self.mainTableView addGestureRecognizer:tapTableView];
     
@@ -303,7 +304,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.item.combinationLayout.cellLayoutTotalHeight[indexPath.row] floatValue];
+    return [self.item.combinationLayout.rowHeightArray[indexPath.row] floatValue];
 }
 
 

@@ -19,6 +19,7 @@
     if (self.displayType != ZYPopupViewDisplayTypeFilters)  return;
     
     self.combinationLayout = [ZYLayout layoutWithItem:self];
+    
     for (int i = 0; i < self.childrenNodes.count; i++) {
         ZYCombinationItem *subItem = (ZYCombinationItem *)self.childrenNodes[i];
         subItem.combinationLayout = [[ZYLayout alloc] init];

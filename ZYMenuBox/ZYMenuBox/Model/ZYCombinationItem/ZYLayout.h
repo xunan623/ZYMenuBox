@@ -19,7 +19,13 @@
 
 @property (nonatomic, assign) NSInteger rowNumber;
 @property (nonatomic, strong) NSMutableArray *cellLayoutTotalHeight;
+
 @property (nonatomic, strong) NSMutableArray *cellLayoutTotalInfo;
+
+// 新增自定义高度
+@property (nonatomic, strong) NSMutableArray *rowHeightArray;
+
+@property (nonatomic, strong) ZYCombinationItem *item;
 
 + (instancetype)layoutWithItem:(ZYCombinationItem *)item;
 

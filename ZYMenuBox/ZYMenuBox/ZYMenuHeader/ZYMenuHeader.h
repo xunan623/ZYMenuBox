@@ -53,7 +53,7 @@ static const CGFloat ItemHorizontalMargin = 10.0f;
 static const CGFloat ItemHorizontalDistance = 5.0f;
 
 // ZYCombTextFieldCell
-static const CGFloat ComTextFieldCenterViewH = 35.0f;
+static const CGFloat ComTextFieldCenterViewH = 70.0f;
 
 //ZYDropDownBox
 static const CGFloat DropDownBoxFontSize = 14.0f;
@@ -73,6 +73,40 @@ static const CGFloat DropDownBoxViewTopMargin = 4.0f;
 static const CGFloat DropDownBoxViewSingeHeight = 300.0f;
 // 弹出View的高度 多列
 static const CGFloat DropDownBoxViewMultiHeight = 300.0f;
+
+// 布局多选按钮
+static const NSInteger CombinaRowNumber = 3;
+// 按钮距离边距
+static const CGFloat CombinaButtonLeftMargin = 17.0f;
+// 按钮距离底部
+static const CGFloat CombinaButtonBottomMargin = 10.0f;
+// 垂直间距
+static const CGFloat CombinaButtonVerticalSpace = 13.0f;
+// 水平间距
+static const CGFloat CombinaButtonHorizontalSpace = 13.0f;
+// 按钮高
+static const CGFloat CombinaButtonHeight = 30.0f;
+
+// 标题高度
+static const CGFloat CombinaTableViewHeaderHeight = 40.0f;
+// 标题左间距
+static const CGFloat CombinaTableViewHeaderLeftMargin = 30.0f;
+// 标题上间距
+static const CGFloat CombinaTableViewHeaderTopMargin = 15.0f;
+// 标题高度
+static const CGFloat CombinaTableViewHeaderTextLabelHeight = 15.0f;
+// 标题字体大小
+static const CGFloat CombinaTableViewHeaderTextLabelFont = 14.0f;
+// 标题颜色
+static NSString *CombinaTableViewHeaderTextLabelColor = @"838EA6";
+
+// 滑竿距离左侧
+static const CGFloat CombinaTableViewSliderLeftMargin = 15.0f;
+
+
+
+
+
 
 static const CGFloat ArrowSide = 8.0f;
 static const CGFloat ArrowToRight = 6.0f;

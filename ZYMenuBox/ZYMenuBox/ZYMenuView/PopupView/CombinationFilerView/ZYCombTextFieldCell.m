@@ -8,6 +8,7 @@
 
 #import "ZYCombTextFieldCell.h"
 #import "ZYMenuHeader.h"
+#import "SFDualWaySlider.h"
 
 @interface ZYCombTextFieldCell()<UITextFieldDelegate>
 
@@ -17,6 +18,8 @@
 
 @property (strong, nonatomic) UITextField *lowFloorField;
 @property (strong, nonatomic) UITextField *highFloorField;
+
+@property (strong, nonatomic) SFDualWaySlider *slider;
 
 @end
 
@@ -41,49 +44,61 @@
 
 - (void)setupUI {
     [self addSubview:self.titleLabel];
-    [self addSubview:self.centerView];
-    [self.centerView addSubview:self.centerLine];
+//    [self addSubview:self.centerView];
+//    [self.centerView addSubview:self.centerLine];
     
-    self.titleLabel.frame = CGRectMake(ItemHorizontalMargin, TitleVerticalMargin, self.width - ItemHorizontalMargin , TitleHeight);
-    self.centerView.frame = CGRectMake(ItemHorizontalMargin, self.titleLabel.height + 10 + self.titleLabel.top, kScreenWidth - 2 * ItemHorizontalMargin, ComTextFieldCenterViewH);
-    self.centerLine.frame = CGRectMake(self.centerView.width/2 - 8, self.centerView.height/2 , 16, 1);
+    // layout
+    self.titleLabel.frame = CGRectMake(CombinaTableViewHeaderLeftMargin,
+                                       CombinaTableViewHeaderTopMargin,
+                                       self.width - CombinaTableViewHeaderLeftMargin ,
+                                       CombinaTableViewHeaderTextLabelHeight);
     
-    for (UIView *subView in self.centerView.subviews) {
-        [subView removeFromSuperview];
-    }
+//    self.centerView.frame = CGRectMake(CombinaTableViewHeaderLeftMargin,
+//                                       self.titleLabel.height + 10 + self.titleLabel.top,
+//                                       kScreenWidth - 2 * ItemHorizontalMargin,
+//                                       ComTextFieldCenterViewH);
+    [self addSubview:self.slider];
     
-    NSInteger count = 2;
-    for (NSInteger i = 0; i< count; i++) {
-        UIButton *bgView = [[UIButton alloc] init];
-        bgView.layer.masksToBounds = YES;
-        bgView.layer.borderWidth = .5f;
-        bgView.layer.borderColor = [UIColor colorWithHexString:DropDownBoxNormalColor].CGColor;
-        [bgView setTitle:@"层" forState:UIControlStateNormal];
-        bgView.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        bgView.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
-        bgView.titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
-        [bgView setTitleColor:[UIColor colorWithHexString:DropDownBoxNormalColor] forState:UIControlStateNormal];
-        UITextField *textField = [[UITextField alloc] init];
-        textField.font = [UIFont systemFontOfSize:ButtonFontSize];
-        textField.textColor = [UIColor colorWithHexString:DropDownBoxSelectedColor];
-        textField.keyboardType = UIKeyboardTypePhonePad;
-        textField.tag = i * 100;
-        [textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
-        
-        textField.delegate = self;
-        if (i == 0) {
-            bgView.frame = CGRectMake(0, 0, self.centerView.width/2 - 20, ComTextFieldCenterViewH);
-            self.lowFloorField = textField;
-        } else {
-            bgView.frame = CGRectMake(kScreenWidth/2 + 10, 0, self.centerView.width/2 - 20, ComTextFieldCenterViewH);
-            self.highFloorField = textField;
-        }
-        textField.frame = CGRectMake(bgView.left + 10, 0, bgView.width - 30, ComTextFieldCenterViewH);
-        textField.placeholder = @"不限";
-        [self.centerView addSubview:bgView];
-        [self.centerView addSubview:textField];
-        
-    }
+    
+    
+    
+//    self.centerLine.frame = CGRectMake(self.centerView.width/2 - 8, self.centerView.height/2 , 16, 1);
+//    for (UIView *subView in self.centerView.subviews) {
+//        [subView removeFromSuperview];
+//    }
+//    
+//    NSInteger count = 2;
+//    for (NSInteger i = 0; i< count; i++) {
+//        UIButton *bgView = [[UIButton alloc] init];
+//        bgView.layer.masksToBounds = YES;
+//        bgView.layer.borderWidth = .5f;
+//        bgView.layer.borderColor = [UIColor colorWithHexString:DropDownBoxNormalColor].CGColor;
+//        [bgView setTitle:@"层" forState:UIControlStateNormal];
+//        bgView.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//        bgView.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+//        bgView.titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
+//        [bgView setTitleColor:[UIColor colorWithHexString:DropDownBoxNormalColor] forState:UIControlStateNormal];
+//        UITextField *textField = [[UITextField alloc] init];
+//        textField.font = [UIFont systemFontOfSize:ButtonFontSize];
+//        textField.textColor = [UIColor colorWithHexString:DropDownBoxSelectedColor];
+//        textField.keyboardType = UIKeyboardTypePhonePad;
+//        textField.tag = i * 100;
+//        [textField addTarget:self action:@selector(textFieldWithText:) forControlEvents:UIControlEventEditingChanged];
+//        
+//        textField.delegate = self;
+//        if (i == 0) {
+//            bgView.frame = CGRectMake(0, 0, self.centerView.width/2 - 20, ComTextFieldCenterViewH);
+//            self.lowFloorField = textField;
+//        } else {
+//            bgView.frame = CGRectMake(kScreenWidth/2 + 10, 0, self.centerView.width/2 - 20, ComTextFieldCenterViewH);
+//            self.highFloorField = textField;
+//        }
+//        textField.frame = CGRectMake(bgView.left + 10, 0, bgView.width - 30, ComTextFieldCenterViewH);
+//        textField.placeholder = @"不限";
+//        [self.centerView addSubview:bgView];
+//        [self.centerView addSubview:textField];
+//        
+//    }
 }
 
 - (void)setItem:(ZYItem *)item {
@@ -99,13 +114,16 @@
 }
 
 #pragma mark - Setting & Getting
+#pragma mark - Setting & Getting
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize:ButtonFontSize];
+        _titleLabel.font = [UIFont systemFontOfSize:CombinaTableViewHeaderTextLabelFont];
+        _titleLabel.textColor = [UIColor colorWithHexString:CombinaTableViewHeaderTextLabelColor];
     }
     return _titleLabel;
 }
+
 
 - (UIView *)centerLine {
     if (!_centerLine) {
@@ -121,6 +139,33 @@
     }
     return _centerView;
 }
+
+- (SFDualWaySlider *)slider {
+    if (!_slider) {
+        _slider = [[SFDualWaySlider alloc] initWithFrame:CGRectMake(CombinaTableViewSliderLeftMargin,
+                                                                    CombinaTableViewHeaderHeight,
+                                                                    kScreenWidth - 2 * CombinaTableViewSliderLeftMargin,
+                                                                    ComTextFieldCenterViewH)
+                                                minValue:0
+                                                maxValue:40
+                                         blockSpaceValue:1];
+        _slider.progressRadius = 5;
+        [_slider.minIndicateView setTitle:@"0层"];
+        [_slider.maxIndicateView setTitle:@"40层"];
+        
+        _slider.getMinTitle = ^NSString *(CGFloat minValue) {
+            return [NSString stringWithFormat:@"%.f层",floor(minValue)];
+            
+        };
+        
+        _slider.getMaxTitle = ^NSString *(CGFloat maxValue) {
+            return [NSString stringWithFormat:@"%.f层",floor(maxValue)];
+        };
+    }
+    return _slider;
+}
+
+
 
 #pragma mark - UITextFieldDelegate
 
