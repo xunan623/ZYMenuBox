@@ -301,11 +301,13 @@
             }
             _minValue = x/(_progressWidth-_blockSpace);
             
-            if (_minValue > _frontScale) {
-                _currentMinValue = (_minValue - _frontScale)/(1 -_frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _minSetValue;
-            }else {
-                _currentMinValue = _minValue/_frontScale * _frontValue + _minSetValue;
-            }
+            _currentMinValue =  pow(_minValue, 1.5) * (_maxSetValue - _blockSpaceValue);
+            
+//            if (_minValue > _frontScale) {
+//                _currentMinValue = (_minValue - _frontScale)/(1 -_frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _minSetValue;
+//            }else {
+//                _currentMinValue = _minValue/_frontScale * _frontValue + _minSetValue;
+//            }
             [self didcurrentMaxOrMinValueChanged];
             
             if (self.getMinTitle) {
@@ -356,13 +358,14 @@
                 y = (_progressWidth + _progressLeftSpace) - point.x;
             }
             _maxValue = 1 - y/(_progressWidth-_blockSpace);
-            if (_maxValue > _frontScale) {
-                _currentMaxValue = (_maxValue - _frontScale)/(1 - _frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _blockSpaceValue + _minSetValue;
-            }else {
-                _currentMaxValue = _maxValue/_frontScale * _frontValue +_blockSpaceValue + _minSetValue;
-            }
+//            if (_maxValue > _frontScale) {
+//                _currentMaxValue = (_maxValue - _frontScale)/(1 - _frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _blockSpaceValue + _minSetValue;
+//            }else {
+//                _currentMaxValue = _maxValue/_frontScale * _frontValue +_blockSpaceValue + _minSetValue;
+//            }
             
-    
+            _currentMaxValue = pow(_maxValue, 1.5) * (_maxSetValue);
+
             if (self.getMaxTitle) {
                 [_maxIndicateView setTitle:self.getMaxTitle(_currentMaxValue)];
             }
