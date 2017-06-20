@@ -19,13 +19,11 @@
     ZYMultiItem *rootItem1 = [ZYMultiItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"区域"];
     
     ZYSingleItem *rootItem2 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"价格"];
-//    ZYSingleItem *rootItem3 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"面积"];
     ZYSingleItem *rootItem4 = [ZYSingleItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"户型"];
     
     ZYCombinationItem *rootItem5 = [ZYCombinationItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:@"更多"];
     
     // 更多 多选
-    rootItem5.selectedType = ZYPopupViewMultilSeMultiSelection;
     rootItem5.displayType = ZYPopupViewDisplayTypeFilters;
 
     // 标签
@@ -44,7 +42,15 @@
     for (NSInteger i = 0; i < comArray.count; i++) {
         NSDictionary *itemDict = comArray[i];
         ZYItem *item5_A = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:[itemDict.allKeys lastObject]];
-        if (i == comArray.count - 1) item5_A.selectedType = ZYPopupViewInputViewSelection;
+        if (i == comArray.count - 1) {
+            item5_A.selectedType = ZYPopupViewInputViewSelection;
+        } else if (i == 0) {
+            item5_A.selectedType = ZYPopupViewMultilSeMultiSelection;
+        } else {
+            item5_A.selectedType = ZYPopupViewSingleSelection ;
+
+        }
+        
         [rootItem5 addNode:item5_A];
         
         if (i == comArray.count -1) {
@@ -60,7 +66,7 @@
             for (NSInteger j = 0; j < count; j++) {
                 NSString *title = [itemDict.allValues lastObject][j];
                 ZYItem *item5_B = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:title];
-//                if (j == 0) item5_B.isSelected = YES; // 更多里面没有默认选项
+                item5_B.selectedType = ZYPopupViewMultilSeMultiSelection;
                 [item5_A addNode:item5_B];
             }
         }

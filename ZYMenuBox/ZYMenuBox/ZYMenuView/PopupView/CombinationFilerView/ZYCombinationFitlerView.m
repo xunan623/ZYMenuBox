@@ -315,21 +315,29 @@
     NSInteger indexOfSelectedArray = [self _indexOfSelectedArrayByPath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index]];
     NSMutableArray *itemArray = self.selectedArray[indexOfSelectedArray];
     
-    switch (self.item.selectedType) {
+    ZYItem *item = self.item.childrenNodes[indexPath.row];
+    
+    switch (item.selectedType) {
         case ZYPopupViewSingleSelection: { // 单选处理
             if ([self _iscontainsSelectedPath:[ZYSelectedPath pathWithFirstPath:indexPath.row
                                                                      secondPath:index]
-                                                                    sourceArray:itemArray] && itemArray.count == 1) return; // 包含
-            ZYSelectedPath *removeIndexPath = [itemArray lastObject];
-            [itemArray removeAllObjects];
-            self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = NO;
-            [itemArray addObject:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index]];
-            self.item.childrenNodes[indexPath.row].childrenNodes[index].isSelected = YES;
+                                                                    sourceArray:itemArray]) {
+                if (itemArray.count == 1) {
+                    ZYSelectedPath *removeIndexPath = [self _removePath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index] sourceArray:itemArray];
+                    self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = NO;
+                }
+            } else {
+                ZYSelectedPath *removeIndexPath = [itemArray lastObject];
+                [itemArray removeAllObjects];
+                self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = NO;
+                [itemArray addObject:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index]];
+                self.item.childrenNodes[indexPath.row].childrenNodes[index].isSelected = YES;
+
+            }
         }
             break;
         case ZYPopupViewMultilSeMultiSelection: { // 多选处理
             if ([self _iscontainsSelectedPath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index] sourceArray:itemArray]) {
-                if (itemArray.count == 1) return;
                 ZYSelectedPath *removeIndexPath = [self _removePath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index] sourceArray:itemArray];
                 self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = NO;
             }else {
