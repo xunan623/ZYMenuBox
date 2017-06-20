@@ -111,7 +111,7 @@
         _minValue = (_currentMinValue - _minSetValue)/_frontValue * _frontScale;
     }
     
-    CGFloat x = _minValue * (_progressWidth-_blockSpace);
+    CGFloat x = pow(_minValue, 1.5) * (_progressWidth-_blockSpace);
     if (self.getMinTitle) {
         [_minIndicateView setTitle:self.getMinTitle(_currentMinValue)];
     }
@@ -136,9 +136,10 @@
     }else {
         _maxValue = (_currentMaxValue - _blockSpaceValue - _minSetValue)/_frontValue * _frontScale;
     }
+    NSLog(@"%f--- %f", _maxValue, _currentMaxValue);
     
     
-    CGFloat y = (1 - _maxValue)*(_progressWidth-_blockSpace);
+    CGFloat y =  pow(1 - _maxValue, 1.5) *(_progressWidth-_blockSpace);
     if (self.getMaxTitle) {
         [_maxIndicateView setTitle:self.getMaxTitle(_currentMaxValue)];
     }

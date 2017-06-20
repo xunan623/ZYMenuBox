@@ -109,8 +109,12 @@
     if (self.titleLabel.superview == nil) {
         [self addSubview:self.titleLabel];
     }
-    self.lowFloorField.text = item.childrenNodes[0].title;
-    self.highFloorField.text = item.childrenNodes[1].title;
+//    self.lowFloorField.text = item.childrenNodes[0].title;
+//    self.highFloorField.text = item.childrenNodes[1].title;
+    
+    self.slider.currentMaxValue = [item.childrenNodes[1].title floatValue];
+    self.slider.currentMinValue = [item.childrenNodes[0].title floatValue];
+
 }
 
 #pragma mark - Setting & Getting
@@ -125,13 +129,13 @@
 }
 
 
-- (UIView *)centerLine {
-    if (!_centerLine) {
-        _centerLine = [[UIView alloc] init];
-        _centerLine.backgroundColor = [UIColor colorWithHexString:@"95A0B5"];
-    }
-    return _centerLine;
-}
+//- (UIView *)centerLine {
+//    if (!_centerLine) {
+//        _centerLine = [[UIView alloc] init];
+//        _centerLine.backgroundColor = [UIColor colorWithHexString:@"95A0B5"];
+//    }
+//    return _centerLine;
+//}
 
 - (UIView *)centerView {
     if (!_centerView) {
@@ -152,13 +156,16 @@
         _slider.progressRadius = 5;
         [_slider.minIndicateView setTitle:@"0层"];
         [_slider.maxIndicateView setTitle:@"40层"];
-        
+
+        __block typeof(self) blockSelf = self;
         _slider.getMinTitle = ^NSString *(CGFloat minValue) {
+            blockSelf.item.childrenNodes[0].title = [NSString stringWithFormat:@"%.0f", minValue];
             return [NSString stringWithFormat:@"%.f层",floor(minValue)];
             
         };
         
         _slider.getMaxTitle = ^NSString *(CGFloat maxValue) {
+            blockSelf.item.childrenNodes[1].title = [NSString stringWithFormat:@"%.0f", maxValue];
             return [NSString stringWithFormat:@"%.f层",floor(maxValue)];
         };
     }
