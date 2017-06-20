@@ -33,6 +33,7 @@
 
 @property (nonatomic, assign) NSInteger zeroLinePage;
 
+
 @end
 
 @implementation ZYMenuResultView
@@ -62,6 +63,13 @@
     return _itemsPathArray;
 }
 
+- (ZYMenuParamsModel *)paramsModel {
+    if (!_paramsModel) {
+        _paramsModel = [[ZYMenuParamsModel alloc] init];
+    }
+    return _paramsModel;
+}
+
 - (void)setupWithArray:(NSMutableArray *)array withIndex:(NSInteger)index dataArray:(NSMutableArray *)dataArray {
     self.dataArray = dataArray;
     
@@ -77,18 +85,21 @@
             // 先清除筛选中的标签
             NSMutableArray *tempArray = self.itemsPathArray.mutableCopy;
             for (NSDictionary *dict in self.itemsPathArray) {
+                
                 for (NSString *key in dict.allKeys) {
-                    if ([key isEqualToString:ZYMenuFilterParamsTag] ||
-                        [key isEqualToString:ZYMenuFilterParamsDirection] ||
-                        [key isEqualToString:ZYMenuFilterParamsAcreage] ||
-                        [key isEqualToString:ZYMenuFilterParamsFloor]) {
-                        [tempArray removeObject:dict];
+                    if (![ZYNumberStringTool zy_IsPureInt:[NSString stringWithFormat:@"%@",key]]) {
+                        if( [key isEqualToString:ZYMenuFilterParamsTag] ||
+                           [key isEqualToString:ZYMenuFilterParamsDirection] ||
+                           [key isEqualToString:ZYMenuFilterParamsAcreage] ||
+                           [key isEqualToString:ZYMenuFilterParamsFloor]) {
+                            [tempArray removeObject:dict];
+                        }
                     }
+                    
                 }
             }
             [self.itemsPathArray removeAllObjects];
             self.itemsPathArray = tempArray;
-            [self reloadTagView];
             
             [array enumerateObjectsUsingBlock:^(NSMutableArray *subArray, NSUInteger  idx, BOOL *stop) {
                 
@@ -111,6 +122,7 @@
 /** 刷新tagView */
 - (void)reloadTagView {
     
+    // 清理视图
     self.previousFrame = CGRectZero;
     self.totalHeight = 0.0;
     self.zeroLinePage = 0.0;
@@ -119,23 +131,45 @@
     }
     self.height = self.totalHeight;
     
+    // 清理模型
+    self.paramsModel = [[ZYMenuParamsModel alloc] init];
+    
+    
+    
     for (NSInteger i = 0; i < self.itemsPathArray.count; i++) {
         NSDictionary *keyPath = self.itemsPathArray[i];
         [keyPath enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSArray *keyPathArray, BOOL *stop) {
             NSLog(@"%@--%@", key, keyPath);
             if ([ZYNumberStringTool zy_IsPureInt:[NSString stringWithFormat:@"%@",key]]) { // 纯数字
+                
                 ZYItem *keyItem = self.dataArray[[key integerValue]];
                 for (NSInteger j = 0; j < keyPathArray.count; j++) {
                     ZYSelectedPath *keyPath = keyPathArray[j];
-#pragma mark - TODO 这里是选中默认的功能 这里要返回到接口中清除请求参数
-                    if (keyPath.firstPath == 0) {
+                    // 取出数据放模型
+                    if (keyPath.firstPath == 0) { // 区域
+                        self.paramsModel.areaCode = @"";
                         break;
                     }
+                    
                     [self setupBtnWithNSString:[keyItem findTitleBySelectedPath:keyPath]
                                       withItem:keyItem
                                          index:[key integerValue]
                                           keyPath:keyPath];
+                    
+                    // 取出数据放模型
+                    if ([key integerValue] == 0) {
+                        self.paramsModel.areaCode = [keyItem findCodeBySelectedPath:keyPath];
+                    }
+                    else if ([key integerValue] == 1) {
+                        self.paramsModel.priceCode =  [keyItem findCodeBySelectedPath:keyPath];
+                    }
+                    else if ([key integerValue] == 2) {
+                        self.paramsModel.houseType =  [keyItem findCodeBySelectedPath:keyPath];
+                    }
                 }
+                
+            
+                
             } else {
                 ZYItem *keyItem = self.dataArray[3];
                 for (NSInteger j = 0; j < keyPathArray.count; j++) {
@@ -145,11 +179,29 @@
                                       withItem:keyItem
                                          index:3
                                        keyPath:keyPath];
+                    NSLog(@"%@--", keyItem.childrenNodes[keyPath.firstPath].title);
+                    
+                    // 取出数据放模型
+                    if ([keyItem.childrenNodes[keyPath.firstPath].title isEqualToString:ZYMenuFilterParamsTag]) {
+                        [self.paramsModel.tagCode appendString:[NSString stringWithFormat:@",%@",secondItem.title]];
+                    }
+                    else if ([keyItem.childrenNodes[keyPath.firstPath].title isEqualToString:ZYMenuFilterParamsDirection]) {
+                        self.paramsModel.directionCode =  secondItem.title;
+                    }
+                    else if ([keyItem.childrenNodes[keyPath.firstPath].title isEqualToString:ZYMenuFilterParamsAcreage]) {
+                        self.paramsModel.acreageCode =  secondItem.title;
+                    }
+                    else if ([keyItem.childrenNodes[keyPath.firstPath].title isEqualToString:ZYMenuFilterParamsFloor]) {
+                        self.paramsModel.floorCode =  secondItem.title;
+                    }
+
                 }
             }
             
         }];
     }
+
+    NSLog(@"区域:%@, 价格:%@, 户型:%@, 标签:%@, 面积:%@, 朝向:%@ 楼层:%@", self.paramsModel.areaCode, self.paramsModel.priceCode, self.paramsModel.houseType, self.paramsModel.tagCode, self.paramsModel.acreageCode, self.paramsModel.directionCode, self.paramsModel.floorCode );
 }
 
 /** 保存的数组中是否有当前点击的path */

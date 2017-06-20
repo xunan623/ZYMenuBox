@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZYMenuParamsModel.h"
 
 @class ZYItem;
 
@@ -17,6 +18,9 @@
 @end
 
 @interface ZYMenuResultView : UIView
+
+
+@property (nonatomic, strong) ZYMenuParamsModel *paramsModel;
 
 @property (nonatomic, weak) id<ZYMenuResultViewDelegate> delegate;
 

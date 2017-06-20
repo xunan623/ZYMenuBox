@@ -136,7 +136,6 @@
     }else {
         _maxValue = (_currentMaxValue - _blockSpaceValue - _minSetValue)/_frontValue * _frontScale;
     }
-    NSLog(@"%f--- %f", _maxValue, _currentMaxValue);
     
     
     CGFloat y =  pow(1 - _maxValue, 1.5) *(_progressWidth-_blockSpace);

@@ -64,6 +64,9 @@ typedef NS_ENUM(NSUInteger, ZYPopupViewDisplayType) { //分辨弹出来的view�
                     subtitleName:(NSString *)subtitle
                             code:(NSString *)code;
 - (void)addNode:(ZYItem *)node;
+/** 找标题 */
 - (NSString *)findTitleBySelectedPath:(ZYSelectedPath *)selectedPath;
+/** 找code */
+- (NSString *)findCodeBySelectedPath:(ZYSelectedPath *)selectedPath;
 
 @end

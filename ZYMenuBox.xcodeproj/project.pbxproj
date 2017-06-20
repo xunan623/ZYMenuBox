@@ -59,6 +59,7 @@
 		719EA79C1EF7C7F700C11671 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 719EA7921EF7C7F700C11671 /* ViewController+MASAdditions.m */; };
 		71A187A21EB1C0B2001096BE /* ZYMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A187A11EB1C0B2001096BE /* ZYMenuHeaderView.m */; };
 		71A187A51EB1C512001096BE /* ZYCombinationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A187A41EB1C512001096BE /* ZYCombinationCell.m */; };
+		71D417A71EF8F3D500212257 /* ZYMenuParamsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D417A61EF8F3D500212257 /* ZYMenuParamsModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +163,8 @@
 		71A187A11EB1C0B2001096BE /* ZYMenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuHeaderView.m; sourceTree = "<group>"; };
 		71A187A31EB1C512001096BE /* ZYCombinationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCombinationCell.h; sourceTree = "<group>"; };
 		71A187A41EB1C512001096BE /* ZYCombinationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCombinationCell.m; sourceTree = "<group>"; };
+		71D417A51EF8F3D500212257 /* ZYMenuParamsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuParamsModel.h; sourceTree = "<group>"; };
+		71D417A61EF8F3D500212257 /* ZYMenuParamsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuParamsModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,6 +417,7 @@
 		715E7E271EB3100C00A5E247 /* ZYMenuResultBox */ = {
 			isa = PBXGroup;
 			children = (
+				71D417A41EF8F3B800212257 /* Model */,
 				711F47C91EB9C8900004D965 /* Tool */,
 				716AA5DB1EB4D6F4002EC350 /* Resource */,
 				715E7E281EB3101D00A5E247 /* View */,
@@ -503,6 +507,15 @@
 				719EA7921EF7C7F700C11671 /* ViewController+MASAdditions.m */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		71D417A41EF8F3B800212257 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				71D417A51EF8F3D500212257 /* ZYMenuParamsModel.h */,
+				71D417A61EF8F3D500212257 /* ZYMenuParamsModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -595,6 +608,7 @@
 				7187CFBB1EB0AE5E001A8332 /* ZYMultiFitlerView.m in Sources */,
 				711865E71EAF4CC300A555E4 /* ZYLayout.m in Sources */,
 				719EA79B1EF7C7F700C11671 /* View+MASAdditions.m in Sources */,
+				71D417A71EF8F3D500212257 /* ZYMenuParamsModel.m in Sources */,
 				719EA7931EF7C7F700C11671 /* MASCompositeConstraint.m in Sources */,
 				7118654F1EAEDA2800A555E4 /* main.m in Sources */,
 				711866081EAF618500A555E4 /* ZYBasePopupView.m in Sources */,

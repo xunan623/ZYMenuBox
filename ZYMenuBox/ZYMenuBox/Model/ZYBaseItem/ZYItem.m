@@ -98,4 +98,16 @@
 
 }
 
+
+- (NSString *)findCodeBySelectedPath:(ZYSelectedPath *)selectedPath {
+    if (selectedPath.thirdPath != -1) {
+        return self.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath].childrenNodes[selectedPath.thirdPath].code;
+    }
+    if (selectedPath.secondPath != -1) {
+        return [(ZYItem *)self.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath] code];
+    }
+    return [self.childrenNodes[selectedPath.firstPath] code];
+    
+}
+
 @end
