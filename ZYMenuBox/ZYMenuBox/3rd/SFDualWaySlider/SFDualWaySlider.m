@@ -302,6 +302,7 @@
             _minValue = x/(_progressWidth-_blockSpace);
             
             _currentMinValue =  pow(_minValue, 1.5) * (_maxSetValue - _blockSpaceValue);
+        
             
 //            if (_minValue > _frontScale) {
 //                _currentMinValue = (_minValue - _frontScale)/(1 -_frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _minSetValue;
@@ -365,6 +366,7 @@
 //            }
             
             _currentMaxValue = pow(_maxValue, 1.5) * (_maxSetValue);
+            _currentMaxValue = _currentMaxValue < 1 ? 1 : _currentMaxValue;
 
             if (self.getMaxTitle) {
                 [_maxIndicateView setTitle:self.getMaxTitle(_currentMaxValue)];
