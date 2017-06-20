@@ -74,7 +74,24 @@
             break;}
         case ZYPopupViewDisplayTypeFilters:{
             
+            // 先清除筛选中的标签
+            NSMutableArray *tempArray = self.itemsPathArray.mutableCopy;
+            for (NSDictionary *dict in self.itemsPathArray) {
+                for (NSString *key in dict.allKeys) {
+                    if ([key isEqualToString:ZYMenuFilterParamsTag] ||
+                        [key isEqualToString:ZYMenuFilterParamsDirection] ||
+                        [key isEqualToString:ZYMenuFilterParamsAcreage] ||
+                        [key isEqualToString:ZYMenuFilterParamsFloor]) {
+                        [tempArray removeObject:dict];
+                    }
+                }
+            }
+            [self.itemsPathArray removeAllObjects];
+            self.itemsPathArray = tempArray;
+            [self reloadTagView];
+            
             [array enumerateObjectsUsingBlock:^(NSMutableArray *subArray, NSUInteger  idx, BOOL *stop) {
+                
                 for (ZYSelectedPath *path in subArray) {
                     ZYItem *firstItem = rootItem.childrenNodes[path.firstPath];
                     [self fliterPathWithDict:@{firstItem.title : subArray}];

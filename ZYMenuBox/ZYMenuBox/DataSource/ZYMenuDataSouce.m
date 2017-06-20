@@ -34,11 +34,11 @@
     NSArray *areaTitle = @[@"50平米以下",@"50-70平米",@"70-90平米",@"90-110平米",@"110-130平米",@"130-150平米",@"150-200平米",@"200-300平米",@"300平米以上"];
     NSArray *areaCode = @[@"0-49",@"50-70",@"70-90",@"90-110",@"110-130",@"130-150",@"150-200",@"200-300",@"301-"];
     
-    NSArray *floorCode = @[@"", @""];
-    NSArray *comArray = @[@{@"标签" : tagArray},
-                          @{@"朝向" : directionArray},
-                          @{@"面积" : areaTitle},
-                          @{@"自定义楼层" : floorCode}];
+    NSArray *floorCode = @[@"0", @"40"];
+    NSArray *comArray = @[@{ZYMenuFilterParamsTag : tagArray},
+                          @{ZYMenuFilterParamsDirection : directionArray},
+                          @{ZYMenuFilterParamsAcreage : areaTitle},
+                          @{ZYMenuFilterParamsFloor : floorCode}];
     for (NSInteger i = 0; i < comArray.count; i++) {
         NSDictionary *itemDict = comArray[i];
         ZYItem *item5_A = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeUnselected titleName:[itemDict.allKeys lastObject]];
@@ -48,7 +48,6 @@
             item5_A.selectedType = ZYPopupViewMultilSeMultiSelection;
         } else {
             item5_A.selectedType = ZYPopupViewSingleSelection ;
-
         }
         
         [rootItem5 addNode:item5_A];

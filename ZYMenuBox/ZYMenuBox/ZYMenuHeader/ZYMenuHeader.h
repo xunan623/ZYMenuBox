@@ -119,6 +119,11 @@ static const CGFloat MenuResultViewTagFontSize = 14.0f;
 static NSString *MenuResultViewTagColor = @"9398AA";
 
 
+static NSString *ZYMenuFilterParamsTag = @"标签";
+static NSString *ZYMenuFilterParamsDirection = @"朝向";
+static NSString *ZYMenuFilterParamsAcreage = @"面积";
+static NSString *ZYMenuFilterParamsFloor = @"自定义楼层";
+
 
 #define kScreenHeigth [UIScreen mainScreen].bounds.size.height
 #define kScreenWidth  [UIScreen mainScreen].bounds.size.width
