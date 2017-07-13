@@ -13,17 +13,16 @@
 
 
 @implementation SFDualWayIndicateView{
-    UILabel *_indicateLabel;
     SFDualWayIndicateDirection _direction;
 }
 
 - (instancetype)init{
     if (self = [super init]) {
         self.backgroundColor = [UIColor clearColor];
-        
+        _backIndicateColor = [UIColor colorWithRed:0.24 green:0.61 blue:0.91 alpha:1.00];
         _indicateLabel = [[UILabel alloc] init];
         _indicateLabel.backgroundColor = [UIColor colorWithRed:0.24 green:0.61 blue:0.91 alpha:1.00];
-        _indicateLabel.textColor       = [UIColor whiteColor];
+        _indicateLabel.textColor       = [UIColor colorWithRed:153/255.0 green:161/255.0 blue:178/255.0 alpha:1];
         _indicateLabel.font            = [UIFont systemFontOfSize:15];
         _indicateLabel.textAlignment   = NSTextAlignmentCenter;
         _indicateLabel.layer.cornerRadius = 4;
@@ -33,7 +32,6 @@
         [_indicateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.centerX.width.equalTo(self);
             make.height.equalTo(@21);
-            
         }];
         self.layer.anchorPoint = CGPointMake(0.5, 1);
         
@@ -61,13 +59,14 @@
 }
 
 - (void)setDirectionAnimateToNomal{
-    
+    [self setDirection:SFDualWayIndicateDirectionNomal];
 }
 
 - (void)setBackIndicateColor:(UIColor *)backIndicateColor{
     
     _backIndicateColor = backIndicateColor;
     _indicateLabel.backgroundColor = backIndicateColor;
+    [self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect{
@@ -89,8 +88,8 @@
     [path addLineToPoint:CGPointMake(right, y0)];
     [path closePath];
     
-    [[UIColor colorWithRed:0.24 green:0.61 blue:0.91 alpha:1.00] set];
-    [[UIColor colorWithRed:0.24 green:0.61 blue:0.91 alpha:1.00] setStroke];
+    [_backIndicateColor set];
+    [_backIndicateColor setStroke];
     [path stroke];
     [path fill];
 }

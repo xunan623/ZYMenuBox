@@ -57,7 +57,7 @@
 - (instancetype)initWithFrame:(CGRect)frame image:(UIImage *)image minValue:(CGFloat)minValue maxValue:(CGFloat)maxValue blockSpaceValue:(CGFloat)blockSpaceValue{
     if (self = [super initWithFrame:frame]) {
         _blockImage        = image;
-        _spaceInBlocks     = 0.f;
+        _spaceInBlocks     = 1.f;
         _blockSpace        = image.size.width + _spaceInBlocks;
         _blockSpaceValue   = blockSpaceValue;
         _minSetValue       = minValue;
@@ -72,10 +72,12 @@
         _progressLeftSpace = 20.f;
         _progressHeight    = 10.f;
         _progressRadius    = 0.f;
-        _lightColor        = [UIColor colorWithRed:0.24 green:0.61 blue:0.91 alpha:1.00];
-        _darkColor         = kSF_HEXCOLOR(0xf2f2f2);
+        _lightColor        = kSF_HEXCOLOR(0x5a7392);
+        _darkColor         = kSF_HEXCOLOR(0xeeeeee);
         _showAnimate       = YES;
         _progressWidth     = self.frame.size.width - _progressLeftSpace*2;
+        _indicateViewOffset = 3;
+        _indicateViewWidth  = 35;
         [self initSliderUI];
     }
     return self;
@@ -111,7 +113,7 @@
         _minValue = (_currentMinValue - _minSetValue)/_frontValue * _frontScale;
     }
     
-    CGFloat x = pow(_minValue, 1.5) * (_progressWidth-_blockSpace);
+    CGFloat x = _minValue * (_progressWidth-_blockSpace);
     if (self.getMinTitle) {
         [_minIndicateView setTitle:self.getMinTitle(_currentMinValue)];
     }
@@ -138,7 +140,7 @@
     }
     
     
-    CGFloat y =  pow(1 - _maxValue, 1.5) *(_progressWidth-_blockSpace);
+    CGFloat y = (1 - _maxValue)*(_progressWidth-_blockSpace);
     if (self.getMaxTitle) {
         [_maxIndicateView setTitle:self.getMaxTitle(_currentMaxValue)];
     }
@@ -159,6 +161,26 @@
 - (void)setProgressRadius:(CGFloat)progressRadius{
     _progressRadius = progressRadius;
     _progressView.layer.cornerRadius = progressRadius;
+}
+
+- (void)setIndicateViewOffset:(CGFloat)indicateViewOffset{
+    _indicateViewOffset = indicateViewOffset;
+    [_minIndicateView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_minButton.mas_centerY).offset(-_indicateViewOffset);
+    }];
+    [_maxIndicateView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_maxButton.mas_centerY).offset(-_indicateViewOffset);
+    }];
+}
+
+- (void)setIndicateViewWidth:(CGFloat)indicateViewWidth{
+    _indicateViewWidth = indicateViewWidth;
+    [_minIndicateView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_offset(_indicateViewWidth);
+    }];
+    [_maxIndicateView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_offset(_indicateViewWidth);
+    }];
 }
 
 - (void)setLightColor:(UIColor *)lightColor{
@@ -261,16 +283,18 @@
     
     [_minIndicateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_minButton);
-        make.width.equalTo(@35);
-        make.height.equalTo(@28);
-        make.bottom.equalTo(_minButton.mas_top).offset(10);
+        make.width.mas_offset(_indicateViewWidth);
+        make.height.mas_offset(28);
+        //_minIndicateView 修改了 anchorPoint 所以参照的是centerY
+        make.bottom.equalTo(_minButton.mas_centerY).offset(-_indicateViewOffset);
     }];
 
     [_maxIndicateView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(_maxButton);
-        make.width.equalTo(@35);
-        make.height.equalTo(@28);
-        make.bottom.equalTo(_maxButton.mas_top).offset(10);
+        make.width.mas_offset(_indicateViewWidth);
+        make.height.mas_offset(28);
+        //_maxIndicateView 修改了 anchorPoint 所以参照的是centerY
+        make.bottom.equalTo(_maxButton.mas_centerY).offset(-_indicateViewOffset);
     }];
 }
 
@@ -301,14 +325,11 @@
             }
             _minValue = x/(_progressWidth-_blockSpace);
             
-            _currentMinValue =  pow(_minValue, 1.5) * (_maxSetValue - _blockSpaceValue);
-        
-            
-//            if (_minValue > _frontScale) {
-//                _currentMinValue = (_minValue - _frontScale)/(1 -_frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _minSetValue;
-//            }else {
-//                _currentMinValue = _minValue/_frontScale * _frontValue + _minSetValue;
-//            }
+            if (_minValue > _frontScale) {
+                _currentMinValue = (_minValue - _frontScale)/(1 -_frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _minSetValue;
+            }else {
+                _currentMinValue = _minValue/_frontScale * _frontValue + _minSetValue;
+            }
             [self didcurrentMaxOrMinValueChanged];
             
             if (self.getMinTitle) {
@@ -359,15 +380,13 @@
                 y = (_progressWidth + _progressLeftSpace) - point.x;
             }
             _maxValue = 1 - y/(_progressWidth-_blockSpace);
-//            if (_maxValue > _frontScale) {
-//                _currentMaxValue = (_maxValue - _frontScale)/(1 - _frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _blockSpaceValue + _minSetValue;
-//            }else {
-//                _currentMaxValue = _maxValue/_frontScale * _frontValue +_blockSpaceValue + _minSetValue;
-//            }
+            if (_maxValue > _frontScale) {
+                _currentMaxValue = (_maxValue - _frontScale)/(1 - _frontScale)*(_totalSpaceValue - _frontValue) +_frontValue + _blockSpaceValue + _minSetValue;
+            }else {
+                _currentMaxValue = _maxValue/_frontScale * _frontValue +_blockSpaceValue + _minSetValue;
+            }
             
-            _currentMaxValue = pow(_maxValue, 1.5) * (_maxSetValue);
-            _currentMaxValue = _currentMaxValue < 1 ? 1 : _currentMaxValue;
-
+    
             if (self.getMaxTitle) {
                 [_maxIndicateView setTitle:self.getMaxTitle(_currentMaxValue)];
             }

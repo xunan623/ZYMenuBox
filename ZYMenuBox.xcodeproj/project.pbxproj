@@ -44,9 +44,6 @@
 		7187CFB81EB0A94F001A8332 /* ZYNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7187CFB51EB0A94F001A8332 /* ZYNormalCell.m */; };
 		7187CFBB1EB0AE5E001A8332 /* ZYMultiFitlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7187CFBA1EB0AE5E001A8332 /* ZYMultiFitlerView.m */; };
 		7187CFBE1EB0B04F001A8332 /* ZYMenuLeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7187CFBD1EB0B04F001A8332 /* ZYMenuLeftCell.m */; };
-		719EA7761EF7C7D900C11671 /* huakuai_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 719EA7711EF7C7D900C11671 /* huakuai_icon@2x.png */; };
-		719EA7771EF7C7D900C11671 /* SFDualWayIndicateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 719EA7731EF7C7D900C11671 /* SFDualWayIndicateView.m */; };
-		719EA7781EF7C7D900C11671 /* SFDualWaySlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 719EA7751EF7C7D900C11671 /* SFDualWaySlider.m */; };
 		719EA7931EF7C7F700C11671 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 719EA77B1EF7C7F700C11671 /* MASCompositeConstraint.m */; };
 		719EA7941EF7C7F700C11671 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 719EA77E1EF7C7F700C11671 /* MASConstraint.m */; };
 		719EA7951EF7C7F700C11671 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 719EA7801EF7C7F700C11671 /* MASConstraintMaker.m */; };
@@ -60,6 +57,10 @@
 		71A187A21EB1C0B2001096BE /* ZYMenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A187A11EB1C0B2001096BE /* ZYMenuHeaderView.m */; };
 		71A187A51EB1C512001096BE /* ZYCombinationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 71A187A41EB1C512001096BE /* ZYCombinationCell.m */; };
 		71D417A71EF8F3D500212257 /* ZYMenuParamsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D417A61EF8F3D500212257 /* ZYMenuParamsModel.m */; };
+		71EA89071F1629EB00935932 /* huakuai_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71EA89011F1629EB00935932 /* huakuai_icon@2x.png */; };
+		71EA89081F1629EB00935932 /* huakuai_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71EA89021F1629EB00935932 /* huakuai_icon@3x.png */; };
+		71EA89091F1629EB00935932 /* SFDualWayIndicateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EA89041F1629EB00935932 /* SFDualWayIndicateView.m */; };
+		71EA890A1F1629EB00935932 /* SFDualWaySlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 71EA89061F1629EB00935932 /* SFDualWaySlider.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,11 +130,6 @@
 		7187CFBA1EB0AE5E001A8332 /* ZYMultiFitlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMultiFitlerView.m; sourceTree = "<group>"; };
 		7187CFBC1EB0B04F001A8332 /* ZYMenuLeftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuLeftCell.h; sourceTree = "<group>"; };
 		7187CFBD1EB0B04F001A8332 /* ZYMenuLeftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuLeftCell.m; sourceTree = "<group>"; };
-		719EA7711EF7C7D900C11671 /* huakuai_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huakuai_icon@2x.png"; sourceTree = "<group>"; };
-		719EA7721EF7C7D900C11671 /* SFDualWayIndicateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDualWayIndicateView.h; sourceTree = "<group>"; };
-		719EA7731EF7C7D900C11671 /* SFDualWayIndicateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDualWayIndicateView.m; sourceTree = "<group>"; };
-		719EA7741EF7C7D900C11671 /* SFDualWaySlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDualWaySlider.h; sourceTree = "<group>"; };
-		719EA7751EF7C7D900C11671 /* SFDualWaySlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDualWaySlider.m; sourceTree = "<group>"; };
 		719EA77A1EF7C7F700C11671 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		719EA77B1EF7C7F700C11671 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		719EA77C1EF7C7F700C11671 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -165,6 +161,12 @@
 		71A187A41EB1C512001096BE /* ZYCombinationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCombinationCell.m; sourceTree = "<group>"; };
 		71D417A51EF8F3D500212257 /* ZYMenuParamsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYMenuParamsModel.h; sourceTree = "<group>"; };
 		71D417A61EF8F3D500212257 /* ZYMenuParamsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYMenuParamsModel.m; sourceTree = "<group>"; };
+		71EA89011F1629EB00935932 /* huakuai_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huakuai_icon@2x.png"; sourceTree = "<group>"; };
+		71EA89021F1629EB00935932 /* huakuai_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "huakuai_icon@3x.png"; sourceTree = "<group>"; };
+		71EA89031F1629EB00935932 /* SFDualWayIndicateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDualWayIndicateView.h; sourceTree = "<group>"; };
+		71EA89041F1629EB00935932 /* SFDualWayIndicateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDualWayIndicateView.m; sourceTree = "<group>"; };
+		71EA89051F1629EB00935932 /* SFDualWaySlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFDualWaySlider.h; sourceTree = "<group>"; };
+		71EA89061F1629EB00935932 /* SFDualWaySlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFDualWaySlider.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,22 +461,10 @@
 		719EA76F1EF7C7CC00C11671 /* 3rd */ = {
 			isa = PBXGroup;
 			children = (
+				71EA89001F1629EB00935932 /* SFDualWaySlider */,
 				719EA7791EF7C7F700C11671 /* Masonry */,
-				719EA7701EF7C7D900C11671 /* SFDualWaySlider */,
 			);
 			path = 3rd;
-			sourceTree = "<group>";
-		};
-		719EA7701EF7C7D900C11671 /* SFDualWaySlider */ = {
-			isa = PBXGroup;
-			children = (
-				719EA7711EF7C7D900C11671 /* huakuai_icon@2x.png */,
-				719EA7721EF7C7D900C11671 /* SFDualWayIndicateView.h */,
-				719EA7731EF7C7D900C11671 /* SFDualWayIndicateView.m */,
-				719EA7741EF7C7D900C11671 /* SFDualWaySlider.h */,
-				719EA7751EF7C7D900C11671 /* SFDualWaySlider.m */,
-			);
-			path = SFDualWaySlider;
 			sourceTree = "<group>";
 		};
 		719EA7791EF7C7F700C11671 /* Masonry */ = {
@@ -516,6 +506,19 @@
 				71D417A61EF8F3D500212257 /* ZYMenuParamsModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		71EA89001F1629EB00935932 /* SFDualWaySlider */ = {
+			isa = PBXGroup;
+			children = (
+				71EA89011F1629EB00935932 /* huakuai_icon@2x.png */,
+				71EA89021F1629EB00935932 /* huakuai_icon@3x.png */,
+				71EA89031F1629EB00935932 /* SFDualWayIndicateView.h */,
+				71EA89041F1629EB00935932 /* SFDualWayIndicateView.m */,
+				71EA89051F1629EB00935932 /* SFDualWaySlider.h */,
+				71EA89061F1629EB00935932 /* SFDualWaySlider.m */,
+			);
+			path = SFDualWaySlider;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,7 +580,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				719EA7761EF7C7D900C11671 /* huakuai_icon@2x.png in Resources */,
+				71EA89071F1629EB00935932 /* huakuai_icon@2x.png in Resources */,
 				711865CE1EAEFF2700A555E4 /* pullup@2x.png in Resources */,
 				711865CF1EAEFF2700A555E4 /* pullup@3x.png in Resources */,
 				716AA5DF1EB4D6F4002EC350 /* ZYMenu_Close@3x.png in Resources */,
@@ -585,6 +588,7 @@
 				714080901EB08B3E00080F73 /* city.plist in Resources */,
 				711865CC1EAEFF2700A555E4 /* pulldown@2x.png in Resources */,
 				716AA5DE1EB4D6F4002EC350 /* ZYMenu_Close@2x.png in Resources */,
+				71EA89081F1629EB00935932 /* huakuai_icon@3x.png in Resources */,
 				711865CD1EAEFF2700A555E4 /* pulldown@3x.png in Resources */,
 				7140808F1EB08B3E00080F73 /* area.plist in Resources */,
 				7118655A1EAEDA2800A555E4 /* Assets.xcassets in Resources */,
@@ -617,11 +621,11 @@
 				711865F71EAF51E200A555E4 /* ZYSingleItem.m in Sources */,
 				716B26561EB02BDF003D3B8D /* ZYMultiItem.m in Sources */,
 				711866111EAF63E700A555E4 /* ZYCombinationFitlerView.m in Sources */,
+				71EA890A1F1629EB00935932 /* SFDualWaySlider.m in Sources */,
 				719EA7971EF7C7F700C11671 /* MASViewAttribute.m in Sources */,
 				711865F01EAF4E2D00A555E4 /* ZYCombinationItem.m in Sources */,
 				719EA7941EF7C7F700C11671 /* MASConstraint.m in Sources */,
 				711865EA1EAF4D7F00A555E4 /* ZYAlternativeItem.m in Sources */,
-				719EA7771EF7C7D900C11671 /* SFDualWayIndicateView.m in Sources */,
 				711645FA1ECC2AE1009B88C5 /* ZYMenuTitleButton.m in Sources */,
 				719EA7951EF7C7F700C11671 /* MASConstraintMaker.m in Sources */,
 				711F47CC1EB9C8B30004D965 /* ZYNumberStringTool.m in Sources */,
@@ -635,10 +639,10 @@
 				71A187A21EB1C0B2001096BE /* ZYMenuHeaderView.m in Sources */,
 				716559DD1EB2D01700A1DCCE /* ZYCombTextFieldCell.m in Sources */,
 				719EA7961EF7C7F700C11671 /* MASLayoutConstraint.m in Sources */,
-				719EA7781EF7C7D900C11671 /* SFDualWaySlider.m in Sources */,
 				716AA5E81EB4FDDF002EC350 /* ZYMenuTagViewBtn.m in Sources */,
 				711865FF1EAF601300A555E4 /* ZYDropDownView.m in Sources */,
 				711865F41EAF50EE00A555E4 /* ZYSelectedPath.m in Sources */,
+				71EA89091F1629EB00935932 /* SFDualWayIndicateView.m in Sources */,
 				715E7E2B1EB310E100A5E247 /* ZYMenuResultView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
