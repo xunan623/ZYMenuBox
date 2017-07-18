@@ -17,4 +17,11 @@
     return _tagCode;
 }
 
+- (NSMutableString *)floorCode {
+    if (!_floorCode) {
+        _floorCode = [NSMutableString string];
+    }
+    return _floorCode;
+}
+
 @end

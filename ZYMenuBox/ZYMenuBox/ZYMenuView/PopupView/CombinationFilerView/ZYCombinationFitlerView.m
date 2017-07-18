@@ -354,29 +354,23 @@
 
 #pragma mark - ZYCombTextFieldCellDelegate
 
-- (void)comTextFieldCell:(ZYCombTextFieldCell *)cell changeTextField:(UITextField *)textField {
+- (void)comTextFieldCell:(ZYCombTextFieldCell *)cell changeLowFloor:(NSString *)lowFloor highFloor:(NSString *)highFloor {
     [self.mainTableView setContentOffset:CGPointMake(0, self.mainTableView.contentSize.height -self.mainTableView.height) animated:YES];
-    NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
-    // 输入框会在index为last的数组里面
-    NSMutableArray *itemArray = self.selectedArray.lastObject;
-    NSInteger index = textField.tag / 100;
-    NSLog(@"%@, %zd", itemArray, index);
     
-    if ([self _iscontainsSelectedPath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index] sourceArray:itemArray]) {
-        if (itemArray.count == 1) return;
-        ZYSelectedPath *removeIndexPath = [self _removePath:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index] sourceArray:itemArray];
-        self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = NO;
-        self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].title = textField.text;
-
-    }else {
-        self.item.childrenNodes[indexPath.row].childrenNodes[index].isSelected = YES;
-        self.item.childrenNodes[indexPath.row].childrenNodes[index].title = textField.text;
-        [itemArray addObject:[ZYSelectedPath pathWithFirstPath:indexPath.row secondPath:index]];
+    // 特殊处理
+    for (NSInteger i = 0; i< 2; i++) {
+        NSIndexPath *indexPath0 = [self.mainTableView indexPathForCell:cell];
+        NSInteger indexOfSelectedArray0 = [self _indexOfSelectedArrayByPath:[ZYSelectedPath pathWithFirstPath:indexPath0.row secondPath:i]];
+        NSMutableArray *itemArray0 = self.selectedArray[indexOfSelectedArray0];
+        
+        if ([self _iscontainsSelectedPath:[ZYSelectedPath pathWithFirstPath:indexPath0.row secondPath:i] sourceArray:itemArray0]) {
+            if (itemArray0.count == 1) return;
+            ZYSelectedPath *removeIndexPath = [self _removePath:[ZYSelectedPath pathWithFirstPath:indexPath0.row secondPath:i] sourceArray:itemArray0];
+            self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].isSelected = YES;
+            self.item.childrenNodes[removeIndexPath.firstPath].childrenNodes[removeIndexPath.secondPath].title = i == 0 ? lowFloor : highFloor;
+        }
+        [itemArray0 addObject:[ZYSelectedPath pathWithFirstPath:indexPath0.row secondPath:i]];
     }
-}
-- (void)comTextFieldCell:(ZYCombTextFieldCell *)cell beginEdited:(UITextField *)textField {
-    [self.mainTableView setContentOffset:CGPointMake(0, 250) animated:YES];
-
 }
 
 @end

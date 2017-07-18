@@ -32,7 +32,7 @@
     NSArray *directionArray = @[@"东", @"西" , @"南", @"北", @"东南", @"西南", @"东北", @"西北", @"南北"];
     // 面积
     NSArray *areaTitle = @[@"50平米以下",@"50-70平米",@"70-90平米",@"90-110平米",@"110-130平米",@"130-150平米",@"150-200平米",@"200-300平米",@"300平米以上"];
-    NSArray *areaCode = @[@"0-49",@"50-70",@"70-90",@"90-110",@"110-130",@"130-150",@"150-200",@"200-300",@"301-"];
+//    NSArray *areaCode = @[@"0-49",@"50-70",@"70-90",@"90-110",@"110-130",@"130-150",@"150-200",@"200-300",@"301-"];
     
     NSArray *floorCode = @[@"0", @"20"];
     NSArray *comArray = @[@{ZYMenuFilterParamsTag : tagArray},
@@ -76,10 +76,11 @@
     rootItem1.displayType = ZYPopupViewDisplayTypeMultilayer;
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"];
-    NSArray *cityArray = [NSMutableArray arrayWithContentsOfFile:path];
+    NSMutableArray *cityArray = [NSMutableArray arrayWithContentsOfFile:path];
     
     NSString *pathArea = [[NSBundle mainBundle] pathForResource:@"area" ofType:@"plist"];
-    NSArray * pianArray = [NSMutableArray arrayWithContentsOfFile:pathArea];
+    NSMutableArray * pianArray = [NSMutableArray arrayWithContentsOfFile:pathArea];
+//    [pianArray insertObject:@"全部" atIndex:0];
     for (NSInteger i = 0; i< cityArray.count; i++) {
         NSDictionary *dict = cityArray[i];
         ZYItem *item_A = [ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected
@@ -89,16 +90,30 @@
                                              code:dict[@"DISTRICT_NAME"]];
         item_A.isSelected = (i == 0);
         [rootItem1 addNode:item_A];
+        
+//        if (i == 0) continue;
+        
         for (NSInteger j = 0; j < pianArray.count; j ++) {
-            NSDictionary *subDict = pianArray[j];
-            if ([subDict [@"CREATED_BY"] isEqualToString:dict[@"DISTRICT_NAME"]]) {
-                ZYItem *item_B =  [ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected
-                                                isSelected:NO
-                                                 titleName:subDict[@"UPDATED_BY"]
-                                              subtitleName:@""
-                                                      code:subDict[@"CREATED_TIME"]];
-                [item_A addNode:item_B];
-            }
+//            if (j == 0) {
+//                ZYItem *item_B =  [ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected
+//                                                isSelected:NO
+//                                                 titleName:@"全部"
+//                                              subtitleName:dict[@"CREATED_BY"]
+//                                                      code:dict[@"DISTRICT_NAME"]];
+//                [item_A addNode:item_B];
+//                
+//            } else {
+                NSDictionary *subDict = pianArray[j];
+                if ([subDict [@"CREATED_BY"] isEqualToString:dict[@"DISTRICT_NAME"]]) {
+                    ZYItem *item_B =  [ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected
+                                                    isSelected:NO
+                                                     titleName:subDict[@"UPDATED_BY"]
+                                                  subtitleName:@""
+                                                          code:subDict[@"CREATED_TIME"]];
+                    [item_A addNode:item_B];
+                }
+//            }
+      
         }
         // 默认二层选中第一个
         for (NSInteger k =0; k< item_A.childrenNodes.count; k++) {
@@ -107,8 +122,6 @@
         }
 
     }
-    
-
     
     // 价格
     switch (type) {

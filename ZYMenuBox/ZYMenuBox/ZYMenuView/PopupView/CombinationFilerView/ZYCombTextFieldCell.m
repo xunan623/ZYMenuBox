@@ -86,11 +86,13 @@
     [slider setCurrentMaxValue:[item.childrenNodes[1].title floatValue]];
     [slider setCurrentMinValue:[item.childrenNodes[0].title floatValue]];
     
-    __block typeof(self) blockSelf = self;
+    __weak __block typeof(self) blockSelf = self;
     
     slider.sliderValueChanged = ^(CGFloat minValue, CGFloat maxValue) {
         
-        
+        if ([blockSelf.delegate respondsToSelector:@selector(comTextFieldCell:changeLowFloor:highFloor:)]) {
+            [blockSelf.delegate comTextFieldCell:blockSelf changeLowFloor:[NSString stringWithFormat:@"%.f",floor(minValue)] highFloor:[NSString stringWithFormat:@"%.f",floor(maxValue)]];
+        }
     };
     
     slider.getMinTitle = ^NSString *(CGFloat minValue) {
@@ -127,19 +129,6 @@
         _centerView = [[UIView alloc] init];
     }
     return _centerView;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if ([self.delegate  respondsToSelector:@selector(comTextFieldCell:beginEdited:)]) {
-        [self.delegate comTextFieldCell:self beginEdited:textField];
-    }
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-
-    if ([self.delegate respondsToSelector:@selector(comTextFieldCell:changeTextField:)]) {
-        [self.delegate comTextFieldCell:self changeTextField:textField];
-    }
 }
 
 @end

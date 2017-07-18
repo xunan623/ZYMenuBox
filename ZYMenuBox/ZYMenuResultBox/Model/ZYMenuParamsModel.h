@@ -10,8 +10,6 @@
 
 @interface ZYMenuParamsModel : NSObject
 
-/** 区域参数 */
-@property (nonatomic, copy) NSString *areaCode;
 /** 价格 */
 @property (nonatomic, copy) NSString *priceCode;
 /** 户型 */
@@ -23,8 +21,14 @@
 /** 面积 */
 @property (nonatomic, copy) NSString *acreageCode;
 /** 楼层 */
-@property (nonatomic, copy) NSString *floorCode;
+@property (nonatomic, strong) NSMutableString *floorCode;
 
+/** 城区code */
+@property (nonatomic, copy) NSString *cityCode;
+/** 片区 */
+@property (nonatomic, copy) NSString *districtcode;
+/** 区域参数 */
+@property (nonatomic, copy) NSString *areaCode;
 
 
 @end
