@@ -214,9 +214,24 @@
         for (ZYSelectedPath *selectedPath in subArray) {
             ZYItem *lastItem = self.item.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath];
             lastItem.isSelected = NO;
+            
         }
+
+        // 特殊处理 滑块 重置数据
+        for (NSInteger i = 0; i< subArray.count; i++) {
+            ZYSelectedPath *selectedPath = subArray[i];
+            if (idx == self.selectedArray.count - 1) {
+                ZYItem *lastItem = self.item.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath];
+                lastItem.isSelected = NO;
+                self.item.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath].title = i == 0 ? @"0" : @"40";
+            }
+        }
+        
+        
         [subArray removeAllObjects];
     }];
+    
+    
 }
 
 // 重置
@@ -349,7 +364,9 @@
         default:
             break;
     }
-    [self.mainTableView reloadData];
+    
+    [self.mainTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    [self.mainTableView reloadData];
 }
 
 #pragma mark - ZYCombTextFieldCellDelegate

@@ -34,7 +34,7 @@
     NSArray *areaTitle = @[@"50平米以下",@"50-70平米",@"70-90平米",@"90-110平米",@"110-130平米",@"130-150平米",@"150-200平米",@"200-300平米",@"300平米以上"];
 //    NSArray *areaCode = @[@"0-49",@"50-70",@"70-90",@"90-110",@"110-130",@"130-150",@"150-200",@"200-300",@"301-"];
     
-    NSArray *floorCode = @[@"0", @"20"];
+    NSArray *floorCode = @[@"0", @"40"];
     NSArray *comArray = @[@{ZYMenuFilterParamsTag : tagArray},
                           @{ZYMenuFilterParamsDirection : directionArray},
                           @{ZYMenuFilterParamsAcreage : areaTitle},
@@ -138,7 +138,15 @@
         }
             break;
         case ZYMenuDataSouceTypeSale: {
-            NSArray *salePriceTitle = @[@"全部",@"150万以下",@"150-200万",@"200-250万",@"250-350万",@"350-500万",@"500-700万",@"700-1000万",@"1000万以上"];
+            NSArray *salePriceTitle = @[@"全部",
+                                        @"150万以下",
+                                        @"150-200万",
+                                        @"200-250万",
+                                        @"250-350万",
+                                        @"350-500万",
+                                        @"500-700万",
+                                        @"700-1000万",
+                                        @"1000万以上"];
             NSArray *salePriceCode = @[@"",@"0-1499900",@"1500000-2000000",@"2000000-2500000",@"2500000-3500000",@"3500000-5000000",@"5000000-7000000",@"7000000-10000000",@"10000100-"];
             for (NSInteger i = 0 ; i< salePriceCode.count; i++) {
                 [rootItem2 addNode:[ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected isSelected:(i==0 ? YES : NO)
