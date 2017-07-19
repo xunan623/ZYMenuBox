@@ -170,7 +170,14 @@
         NSMutableString *title = [NSMutableString string];
         for (int i = 0; i <array.count; i++) {
             ZYSelectedPath *path = array[i];
-            [title appendString:i?[NSString stringWithFormat:@";%@",[item findTitleBySelectedPath:path]]:[item findTitleBySelectedPath:path]];
+            
+            // 特殊处理 点击第二列第一条数据 显示第一列title
+            if (index == 0 && path.secondPath == 0) {
+                [title appendString:item.childrenNodes[path.firstPath].title];
+            } else {
+                [title appendString:i?[NSString stringWithFormat:@";%@",[item findTitleBySelectedPath:path]]:[item findTitleBySelectedPath:path]];
+
+            }
             selectedPath = path.firstPath;
         }
         ZYDropDownView *box = self.dropDownViewArray[index];

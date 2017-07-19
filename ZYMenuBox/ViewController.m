@@ -30,8 +30,6 @@
 - (ZYMenuView *)menuListView {
     if (!_menuListView) {
         _menuListView = [[ZYMenuView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, 40)];
-        
-        
         _menuListView.dataSource = self;
         _menuListView.delegate = self;
     }
@@ -51,7 +49,6 @@
 - (UIView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.resultView.frame), kScreenWidth, 200)];
-
         _bottomView.backgroundColor = [UIColor redColor];
     }
     return _bottomView;

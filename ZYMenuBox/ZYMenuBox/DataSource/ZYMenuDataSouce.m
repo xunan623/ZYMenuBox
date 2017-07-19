@@ -91,18 +91,18 @@
         item_A.isSelected = (i == 0);
         [rootItem1 addNode:item_A];
         
-//        if (i == 0) continue;
+        if (i == 0) continue;
         
         for (NSInteger j = 0; j < pianArray.count; j ++) {
-//            if (j == 0) {
-//                ZYItem *item_B =  [ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected
-//                                                isSelected:NO
-//                                                 titleName:@"全部"
-//                                              subtitleName:dict[@"CREATED_BY"]
-//                                                      code:dict[@"DISTRICT_NAME"]];
-//                [item_A addNode:item_B];
-//                
-//            } else {
+            if (j == 0) {
+                ZYItem *item_B =  [ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected
+                                                isSelected:NO
+                                                 titleName:@"全部"
+                                              subtitleName:dict[@"CREATED_BY"]
+                                                      code:dict[@"DISTRICT_NAME"]];
+                [item_A addNode:item_B];
+                
+            } else {
                 NSDictionary *subDict = pianArray[j];
                 if ([subDict [@"CREATED_BY"] isEqualToString:dict[@"DISTRICT_NAME"]]) {
                     ZYItem *item_B =  [ZYItem itemWithItemType:ZYPopupViewDisplayTypeSelected
@@ -112,7 +112,7 @@
                                                           code:subDict[@"CREATED_TIME"]];
                     [item_A addNode:item_B];
                 }
-//            }
+            }
       
         }
         // 默认二层选中第一个

@@ -133,6 +133,7 @@
     
     // 清理模型
     self.paramsModel = [[ZYMenuParamsModel alloc] init];
+    self.paramsModel.cityCode = @"310000";
     
     for (NSInteger i = 0; i < self.itemsPathArray.count; i++) {
         NSDictionary *keyPath = self.itemsPathArray[i];
@@ -145,18 +146,16 @@
                     ZYSelectedPath *keyPath = keyPathArray[j];
                     // 取出数据放模型
                     if (keyPath.firstPath == 0) { // 区域
+                        self.paramsModel.districtcode = @"";
                         self.paramsModel.areaCode = @"";
                         break;
                     }
                     
-                    [self setupBtnWithNSString:[keyItem findTitleBySelectedPath:keyPath]
-                                      withItem:keyItem
-                                         index:[key integerValue]
-                                          keyPath:keyPath];
-                    
                     // 取出数据放模型
                     if ([key integerValue] == 0) {
-                        self.paramsModel.areaCode = [keyItem findCodeBySelectedPath:keyPath];
+                        self.paramsModel.districtcode = keyItem.childrenNodes[keyPath.firstPath].code;
+                        self.paramsModel.areaCode = keyPath.secondPath == 0 ? @"" : [keyItem findCodeBySelectedPath:keyPath];
+
                     }
                     else if ([key integerValue] == 1) {
                         self.paramsModel.priceCode =  [keyItem findCodeBySelectedPath:keyPath];
@@ -164,6 +163,13 @@
                     else if ([key integerValue] == 2) {
                         self.paramsModel.houseType =  [keyItem findCodeBySelectedPath:keyPath];
                     }
+                    
+                    // 特殊处理 areaCode全部的情况
+                    [self setupBtnWithNSString:keyPath.secondPath == 0 ? keyItem.childrenNodes[keyPath.firstPath].title : [keyItem findTitleBySelectedPath:keyPath]
+                                          withItem:keyItem
+                                             index:[key integerValue]
+                                           keyPath:keyPath];
+                    
                 }
             } else {
                 ZYItem *keyItem = self.dataArray[3];
@@ -188,7 +194,7 @@
                         j == 0 ? [floorTitle appendFormat:@"%@层", secondItem.title] : [floorTitle appendFormat:@"-%@层", secondItem.title];
                     }
                     
-                    // 特殊处理楼层
+                    // 特殊处理 楼层
                     if ([keyItem.childrenNodes[keyPath.firstPath].title isEqualToString:ZYMenuFilterParamsFloor]) {
                         
                         if (j == keyPathArray.count -1) {
@@ -212,7 +218,7 @@
         }];
     }
 
-    NSLog(@"区域:%@, 价格:%@, 户型:%@, 标签:%@, 面积:%@, 朝向:%@ 楼底层:%@", self.paramsModel.areaCode, self.paramsModel.priceCode, self.paramsModel.houseType, self.paramsModel.tagCode, self.paramsModel.acreageCode, self.paramsModel.directionCode, self.paramsModel.floorCode );
+    NSLog(@"区域:(城区:%@ 片区:%@ 小区域:%@), 价格:%@, 户型:%@, 标签:%@, 面积:%@, 朝向:%@ 楼底层:%@", self.paramsModel.cityCode, self.paramsModel.districtcode, self.paramsModel.areaCode, self.paramsModel.priceCode, self.paramsModel.houseType, self.paramsModel.tagCode, self.paramsModel.acreageCode, self.paramsModel.directionCode, self.paramsModel.floorCode );
 }
 
 /** 保存的数组中是否有当前点击的path */
@@ -315,7 +321,7 @@
                 NSLog(@"key:%@-vaule:%@", key, value);
                 if ([[NSString stringWithFormat:@"%@", key ] isEqualToString:firstItem.title]) {
                     
-                    // 写死的重置 楼层数据
+                    // 特殊处理 写死的重置 楼层数据
                     if ([firstItem.title isEqualToString:@"自定义楼层"]) {
                    
                         ZYItem *secondItem0 = keyItem.childrenNodes[btn.keyPath.firstPath].childrenNodes[0];
