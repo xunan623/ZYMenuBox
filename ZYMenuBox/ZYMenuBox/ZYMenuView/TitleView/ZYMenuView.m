@@ -76,6 +76,17 @@
                 }
                 break;}
             case ZYPopupViewDisplayTypeFilters:{
+                NSInteger count = 0;
+                for (NSInteger n =0; n<item.childrenNodes.count; n++) {
+                    ZYItem *subItem = item.childrenNodes[n];
+                    for (NSInteger m = 0; m< subItem.childrenNodes.count; m++) {
+                        ZYItem *mSubItem = subItem.childrenNodes[m];
+                        if (mSubItem.isSelected == YES) {
+                            count++;
+                        }
+                    }
+                }
+                if (count==0) [dropMenu updateTitleColor:NO];
                 
                 break;}
             default:
@@ -186,7 +197,6 @@
                     [title appendString:item.childrenNodes[path.firstPath].title];
                 } else {
                     [title appendString:i?[NSString stringWithFormat:@";%@",[item findTitleBySelectedPath:path]]:[item findTitleBySelectedPath:path]];
-                    
                 }
                 selectedPath = path.firstPath;
             }
@@ -199,7 +209,24 @@
         }
             break;
         case ZYPopupViewDisplayTypeFilters: {     //混合类型不做UI赋值操作 直接将item的路径回调回去就好了
+            __block NSInteger selectedPath = -1;
+            __block NSString *title;
+            [array enumerateObjectsUsingBlock:^(NSMutableArray *subArray, NSUInteger idx, BOOL *stop) {
+                
+                NSMutableString *subtitles = [NSMutableString string];
+                for (ZYSelectedPath *path in subArray) {
+                    ZYItem *firstItem = item.childrenNodes[path.firstPath];
+                    ZYItem *secondItem = item.childrenNodes[path.firstPath].childrenNodes[path.secondPath];
+                    title = firstItem.title;
+                    [subtitles appendString:[NSString stringWithFormat:@"  %@",secondItem.title]];
+                    selectedPath = path.firstPath;
+                }
+                NSLog(@"当title为%@时，所选字段为 %@",title,subtitles);
+            }];
             
+            ZYDropDownView *box = self.dropDownViewArray[index];
+            [box updateTitleColor:selectedPath!=-1];
+
 
         }
             break;
