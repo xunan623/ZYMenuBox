@@ -60,6 +60,8 @@
                     ZYItem *subItem = item.childrenNodes[j];
                     if (j == 0 && subItem.isSelected == YES) {
                         [dropMenu updateTitleContent:item.title];
+                        // 特殊处理 标题
+                        [dropMenu updateTitleColor:NO];
                     }
                 }
                 break;}
@@ -68,6 +70,8 @@
                     ZYItem *subItem = item.childrenNodes[n];
                     if (n== 0 && subItem.isSelected == YES) {
                         [dropMenu updateTitleContent:item.title];
+                        // 特殊处理 标题
+                        [dropMenu updateTitleColor:NO];
                     }
                 }
                 break;}
@@ -141,7 +145,7 @@
     
     for (int i = 0; i <self.dropDownViewArray.count; i++) {
         ZYDropDownView *currentBox  = self.dropDownViewArray[i];
-        [currentBox updateTitleState:(i == index)];
+        if (i == index) [currentBox updateTitleState:YES];
     }
     
     self.isAnimation = YES;
@@ -163,44 +167,65 @@
 #pragma mark - ZYPopupViewDelegate
 - (void)popupView:(ZYBasePopupView *)popupView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSUInteger)index {
     ZYItem *item = self.itemArray[index];
-    //混合类型不做UI赋值操作 直接将item的路径回调回去就好了
-    if (item.displayType == ZYPopupViewDisplayTypeMultilayer || item.displayType == ZYPopupViewDisplayTypeNormal) {
-        // 更新选项卡标题
-        __block NSInteger selectedPath = -1;
-        NSMutableString *title = [NSMutableString string];
-        for (int i = 0; i <array.count; i++) {
-            ZYSelectedPath *path = array[i];
-            
-            // 特殊处理 点击第二列第一条数据 显示第一列title
-            if (index == 0 && path.secondPath == 0) {
-                [title appendString:item.childrenNodes[path.firstPath].title];
-            } else {
-                [title appendString:i?[NSString stringWithFormat:@";%@",[item findTitleBySelectedPath:path]]:[item findTitleBySelectedPath:path]];
-
+    
+    // 特殊处理 选项卡标题
+    ZYDropDownView *currentBox = self.dropDownViewArray[index];
+    [currentBox updateTitleState:NO];
+    
+    switch (item.displayType) {
+        case ZYPopupViewDisplayTypeMultilayer:
+        case ZYPopupViewDisplayTypeNormal: {
+            // 更新选项卡标题
+            __block NSInteger selectedPath = -1;
+            NSMutableString *title = [NSMutableString string];
+            for (int i = 0; i <array.count; i++) {
+                ZYSelectedPath *path = array[i];
+                
+                // 特殊处理 点击第二列第一条数据 显示第一列title
+                if (index == 0 && path.secondPath == 0) {
+                    [title appendString:item.childrenNodes[path.firstPath].title];
+                } else {
+                    [title appendString:i?[NSString stringWithFormat:@";%@",[item findTitleBySelectedPath:path]]:[item findTitleBySelectedPath:path]];
+                    
+                }
+                selectedPath = path.firstPath;
             }
-            selectedPath = path.firstPath;
+            ZYDropDownView *box = self.dropDownViewArray[index];
+            
+            // UI赋值操作 其中如果是选中的第一个数据 则title 为默认值
+            [box updateTitleContent:selectedPath == 0 ? item.title : title];
+            [box updateTitleColor:selectedPath!=0];
+
         }
-        ZYDropDownView *box = self.dropDownViewArray[index];
-        
-        // UI赋值操作 其中如果是选中的第一个数据 则title 为默认值
-        if (selectedPath == 0) {
-            [box updateTitleContent:item.title];
-        } else {
-            [box updateTitleContent:title];
+            break;
+        case ZYPopupViewDisplayTypeFilters: {     //混合类型不做UI赋值操作 直接将item的路径回调回去就好了
+            
+
         }
-    };
+            break;
+        default:
+            break;
+    }
+    
+
     
     if ([self.delegate respondsToSelector:@selector(menuView:didSelectedItemsPackagingInArray:atIndex:)]) {
         [self.delegate menuView:self didSelectedItemsPackagingInArray:array atIndex:index];
     }
+    
+
+    
+    
 }
 
 - (void)popupViewWillDismiss:(ZYBasePopupView *)popupView {
     self.perviousIndex = -1;
     [self.symbolArray removeAllObjects];
-    for (ZYDropDownView *currentBox in self.dropDownViewArray) {
-        [currentBox updateTitleState:NO];
-    }
+    
+    // 特殊处理选项卡标题
+//    for (ZYDropDownView *currentBox in self.dropDownViewArray) {
+//        [currentBox updateTitleState:NO];
+//    }
 }
 
 @end

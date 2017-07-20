@@ -61,6 +61,10 @@
     [self.titleButton setTitle:title forState:UIControlStateNormal];
 }
 
+- (void)updateTitleColor:(BOOL)isSelected {
+    [self.titleButton setTitleColor:[UIColor colorWithHexString:isSelected ? DropDownBoxSelectedColor : DropDownBoxNormalColor] forState:UIControlStateNormal];
+}
+
 - (void)respondToTapAction:(id)gesture {
     if ([self.delegate respondsToSelector:@selector(didTapDropDownView:atIndex:)]) {
         [self.delegate didTapDropDownView:self atIndex:self.tag];

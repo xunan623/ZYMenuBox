@@ -26,5 +26,6 @@
 
 - (void)updateTitleState:(BOOL)isSelected;
 - (void)updateTitleContent:(NSString *)title;
+- (void)updateTitleColor:(BOOL)isSelected;
 
 @end
