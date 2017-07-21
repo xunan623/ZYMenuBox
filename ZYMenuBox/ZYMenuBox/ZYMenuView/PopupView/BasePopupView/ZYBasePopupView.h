@@ -15,7 +15,7 @@
 @optional
 - (void)popupView:(ZYBasePopupView *)popupView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSUInteger)index;
 @required
-- (void)popupViewWillDismiss:(ZYBasePopupView *)popupView;
+- (void)popupViewWillDismiss:(ZYBasePopupView *)popupView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSUInteger)index;
 
 @end
 

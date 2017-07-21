@@ -106,8 +106,8 @@
 - (void)dismiss {
     [super dismiss];
     [self _resetValue];
-    if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss:)]) {
-        [self.delegate popupViewWillDismiss:self];
+    if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss: didSelectedItemsPackagingInArray:atIndex:)]) {
+        [self.delegate popupViewWillDismiss:self didSelectedItemsPackagingInArray:self.selectedArray atIndex:self.tag];
     }
     if (self.item.selectedType == ZYPopupViewMultilSeMultiSelection) {
         self.bottomView.hidden = YES;

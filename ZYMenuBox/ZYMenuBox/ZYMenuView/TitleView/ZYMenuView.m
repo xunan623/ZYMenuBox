@@ -179,10 +179,6 @@
 - (void)popupView:(ZYBasePopupView *)popupView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSUInteger)index {
     ZYItem *item = self.itemArray[index];
     
-    // 特殊处理 选项卡标题
-    ZYDropDownView *currentBox = self.dropDownViewArray[index];
-    [currentBox updateTitleState:NO];
-    
     switch (item.displayType) {
         case ZYPopupViewDisplayTypeMultilayer:
         case ZYPopupViewDisplayTypeNormal: {
@@ -204,7 +200,6 @@
             
             // UI赋值操作 其中如果是选中的第一个数据 则title 为默认值
             [box updateTitleContent:selectedPath == 0 ? item.title : title];
-            [box updateTitleColor:selectedPath!=0];
 
         }
             break;
@@ -223,10 +218,6 @@
                 }
                 NSLog(@"当title为%@时，所选字段为 %@",title,subtitles);
             }];
-            
-            ZYDropDownView *box = self.dropDownViewArray[index];
-            [box updateTitleColor:selectedPath!=-1];
-
 
         }
             break;
@@ -240,19 +231,68 @@
         [self.delegate menuView:self didSelectedItemsPackagingInArray:array atIndex:index];
     }
     
-
     
     
 }
 
-- (void)popupViewWillDismiss:(ZYBasePopupView *)popupView {
+- (void)popupViewWillDismiss:(ZYBasePopupView *)popupView didSelectedItemsPackagingInArray:(NSArray *)array atIndex:(NSUInteger)index{
     self.perviousIndex = -1;
     [self.symbolArray removeAllObjects];
     
-    // 特殊处理选项卡标题
-//    for (ZYDropDownView *currentBox in self.dropDownViewArray) {
-//        [currentBox updateTitleState:NO];
-//    }
+    ZYItem *item = self.itemArray[index];
+    
+    
+    ZYDropDownView *currentBox = self.dropDownViewArray[index];
+    [currentBox updateTitleState:NO];
+    
+    switch (item.displayType) {
+        case ZYPopupViewDisplayTypeNormal: {
+            // 更新选项卡标题
+            __block NSInteger selectedPath = -1;
+            for (int i = 0; i <array.count; i++) {
+                ZYSelectedPath *path = array[i];
+                selectedPath = path.firstPath;
+            }
+            ZYDropDownView *box = self.dropDownViewArray[index];
+            
+            // UI赋值操作 其中如果是选中的第一个数据 则title 为默认值
+            [box updateTitleColor:selectedPath!=0];
+            
+        }
+            break;
+        case ZYPopupViewDisplayTypeMultilayer: {
+            __block NSInteger selectedPath = -1;
+            for (int i = 0; i <array.count; i++) {
+                ZYSelectedPath *path = array[i];
+                selectedPath = path.secondPath;
+            }
+            ZYDropDownView *box = self.dropDownViewArray[index];
+            
+            // UI赋值操作 其中如果是选中的第一个数据 则title 为默认值
+            [box updateTitleColor:selectedPath !=-1];
+
+        }
+            break;
+        case ZYPopupViewDisplayTypeFilters: {     //混合类型不做UI赋值操作 直接将item的路径回调回去就好了
+            __block NSInteger selectedPath = -1;
+            [array enumerateObjectsUsingBlock:^(NSMutableArray *subArray, NSUInteger idx, BOOL *stop) {
+                for (ZYSelectedPath *path in subArray) {
+                    selectedPath = path.firstPath;
+                }
+            }];
+            
+            ZYDropDownView *box = self.dropDownViewArray[index];
+            [box updateTitleColor:selectedPath!=-1];
+        }
+            break;
+        default:
+            break;
+    }
+
+
+    
+
+
 }
 
 @end

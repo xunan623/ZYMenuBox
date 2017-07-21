@@ -109,8 +109,9 @@
     if (self.isSuccessfulToCallBack == NO) {
         [self resetValue];
     }
-    if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss:)]) {
-        [self.delegate popupViewWillDismiss:self];
+    
+    if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss: didSelectedItemsPackagingInArray: atIndex:)]) {
+        [self.delegate popupViewWillDismiss:self didSelectedItemsPackagingInArray:self.selectedArray atIndex:self.tag];
     }
     
     CGFloat top =  CGRectGetMaxY(self.sourceFrame);

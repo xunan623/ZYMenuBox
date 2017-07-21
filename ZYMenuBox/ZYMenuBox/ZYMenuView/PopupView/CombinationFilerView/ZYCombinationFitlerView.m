@@ -147,12 +147,13 @@
 - (void)dismiss {
     [super dismiss];
     
-    if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss:)]) {
-        [self.delegate popupViewWillDismiss:self];
-    }
-    
     // 根据isSuccessfulToCallBack字段判断是否要将数据回归到temporaryArray状态
     [self _recoverToTheOriginalState];
+    
+    if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss: didSelectedItemsPackagingInArray:atIndex:)]) {
+        [self.delegate popupViewWillDismiss:self didSelectedItemsPackagingInArray:self.selectedArray atIndex:self.tag];
+    }
+    
     
     self.bottomView.hidden = YES;
     CGFloat top = CGRectGetMaxY(self.sourceFrame);
