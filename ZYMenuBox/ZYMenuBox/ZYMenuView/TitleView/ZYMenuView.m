@@ -261,16 +261,18 @@
         }
             break;
         case ZYPopupViewDisplayTypeMultilayer: {
-            __block NSInteger selectedPath = -1;
+            __block NSInteger secondSelectedPath = -2;
+            __block NSInteger firstSelectedPath = -2;
             for (int i = 0; i <array.count; i++) {
                 ZYSelectedPath *path = array[i];
-                selectedPath = path.secondPath;
+                secondSelectedPath = path.secondPath;
+                firstSelectedPath = path.firstPath;
+                NSLog(@"%zd - %zd", firstSelectedPath, secondSelectedPath);
             }
             ZYDropDownView *box = self.dropDownViewArray[index];
             
             // UI赋值操作 其中如果是选中的第一个数据 则title 为默认值
-            [box updateTitleColor:selectedPath !=-1];
-
+            if (firstSelectedPath !=0) [box updateTitleColor:secondSelectedPath !=-2];
         }
             break;
         case ZYPopupViewDisplayTypeFilters: {     //混合类型不做UI赋值操作 直接将item的路径回调回去就好了

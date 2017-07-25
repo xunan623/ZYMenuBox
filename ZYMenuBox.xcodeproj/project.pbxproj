@@ -552,7 +552,7 @@
 				TargetAttributes = {
 					711865491EAEDA2800A555E4 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = Y2TKYWJ5ZW;
+						DevelopmentTeam = B8YX7Z786Q;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -763,7 +763,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y2TKYWJ5ZW;
+				DEVELOPMENT_TEAM = B8YX7Z786Q;
 				INFOPLIST_FILE = ZYMenuBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
@@ -776,7 +776,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Y2TKYWJ5ZW;
+				DEVELOPMENT_TEAM = B8YX7Z786Q;
 				INFOPLIST_FILE = ZYMenuBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
