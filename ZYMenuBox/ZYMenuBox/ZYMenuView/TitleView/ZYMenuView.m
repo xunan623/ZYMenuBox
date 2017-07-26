@@ -135,10 +135,10 @@
     
     if (self.perviousIndex != -1) {
         if (self.perviousIndex == index) { // 当前点击和上次点击一样
-            for (int i = 0; i <self.dropDownViewArray.count; i++) {
-                ZYDropDownView *currentBox  = self.dropDownViewArray[i];
-                [currentBox updateTitleState:(i == index)];
-            }
+//            for (int i = 0; i <self.dropDownViewArray.count; i++) {
+//                ZYDropDownView *currentBox  = self.dropDownViewArray[i];
+//                [currentBox updateTitleState:(i == index)];
+//            }
             ZYBasePopupView * lastView = self.symbolArray[0];
             [lastView dismiss];
             [self.symbolArray removeAllObjects];

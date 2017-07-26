@@ -151,7 +151,7 @@
     [self _recoverToTheOriginalState];
     
     if ([self.delegate respondsToSelector:@selector(popupViewWillDismiss: didSelectedItemsPackagingInArray:atIndex:)]) {
-        [self.delegate popupViewWillDismiss:self didSelectedItemsPackagingInArray:self.selectedArray atIndex:self.tag];
+        [self.delegate popupViewWillDismiss:self didSelectedItemsPackagingInArray:self.isSuccessfulToCallBack ? self.selectedArray : self.temporaryArray atIndex:self.tag];
     }
     
     
