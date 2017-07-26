@@ -286,6 +286,9 @@
 
 #pragma mark - Public Method
 - (void)callBackDelegate {
+    
+    [self callSliderReset];
+    
     if ([self.delegate respondsToSelector:@selector(popupView:didSelectedItemsPackagingInArray:atIndex:)]) {
         self.isSuccessfulToCallBack = YES;
         [self.delegate popupView:self didSelectedItemsPackagingInArray:self.selectedArray atIndex:self.tag];
@@ -294,6 +297,31 @@
             self.isSuccessfulToCallBack = NO;
         });
     }
+}
+
+/**
+ * 特殊处理 楼层为最小和最大值得时候
+ */
+- (void)callSliderReset {
+    __block CGFloat sliderCurrentMinValue = -1;
+    __block CGFloat sliderCurrentMaxValue = -1;
+    [self.selectedArray enumerateObjectsUsingBlock:^(NSMutableArray *subArray , NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        for (NSInteger i = 0; i< subArray.count; i++) {
+            ZYSelectedPath *selectedPath = subArray[i];
+            if (idx == self.selectedArray.count - 1) {
+                ZYItem *lastItem = self.item.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath];
+                
+                i == 0 ? (sliderCurrentMinValue = [lastItem.title floatValue]) : (sliderCurrentMaxValue = [lastItem.title floatValue]);
+            }
+            if (sliderCurrentMinValue == CombinaSliderMinValue &&
+                sliderCurrentMaxValue == CombinaSliderMaxValue) {
+                if (i == subArray.count -1) {
+                    [subArray removeAllObjects];
+                }
+            }
+        }
+    }];
 }
 
 #pragma mark - UItableViewDelegate
