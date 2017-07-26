@@ -49,6 +49,8 @@
     return self;
 }
 
+#pragma mark - Setting & Getting
+
 - (UIView *)centerView {
     if (!_centerView) {
         _centerView = [[UIView alloc] init];
@@ -69,6 +71,12 @@
     }
     return _paramsModel;
 }
+
+- (void)setBgColor:(UIColor *)bgColor {
+    _bgColor = bgColor;
+    self.backgroundColor = bgColor;
+}
+
 
 - (void)setupWithArray:(NSMutableArray *)array withIndex:(NSInteger)index dataArray:(NSMutableArray *)dataArray {
     self.dataArray = dataArray;
@@ -302,10 +310,6 @@
     
 }
 
-- (void)setBgColor:(UIColor *)bgColor {
-    _bgColor = bgColor;
-    self.backgroundColor = bgColor;
-}
 
 #pragma mark - 按钮的处理方法
 
@@ -329,11 +333,11 @@
                    
                         ZYItem *secondItem0 = keyItem.childrenNodes[btn.keyPath.firstPath].childrenNodes[0];
                         secondItem0.isSelected = NO;
-                        secondItem0.title = @"0";
+                        secondItem0.title = [NSString stringWithFormat:@"%.f", CombinaSliderMinValue];
 
                         ZYItem *secondItem1 = keyItem.childrenNodes[btn.keyPath.firstPath].childrenNodes[1];
                         secondItem1.isSelected = NO;
-                        secondItem1.title = @"40";
+                        secondItem1.title = [NSString stringWithFormat:@"%.f", CombinaSliderMaxValue];
 
                         [value enumerateObjectsUsingBlock:^(ZYSelectedPath *selectedsPath, NSUInteger idx, BOOL * _Nonnull stop) {
                             [value removeObject:selectedsPath];
