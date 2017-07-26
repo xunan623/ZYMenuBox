@@ -218,7 +218,10 @@
         }];
     }
 
-    NSLog(@"区域:(城区:%@ 片区:%@ 小区域:%@), 价格:%@, 户型:%@, 标签:%@, 面积:%@, 朝向:%@ 楼底层:%@", self.paramsModel.cityCode, self.paramsModel.districtcode, self.paramsModel.areaCode, self.paramsModel.priceCode, self.paramsModel.houseType, self.paramsModel.tagCode, self.paramsModel.acreageCode, self.paramsModel.directionCode, self.paramsModel.floorCode );
+    
+    if ([self.delegate respondsToSelector:@selector(resultViewFilterParams:)]) {
+        [self.delegate resultViewFilterParams:self.paramsModel];
+    }
 }
 
 /** 保存的数组中是否有当前点击的path */

@@ -102,5 +102,9 @@
     self.bottomView.top = CGRectGetMaxY(self.resultView.frame);
 }
 
+- (void)resultViewFilterParams:(ZYMenuParamsModel *)model {
+    NSLog(@"区域:(城区:%@ 片区:%@ 小区域:%@), 价格:%@, 户型:%@, 标签:%@, 面积:%@, 朝向:%@ 楼底层:%@", model.cityCode, model.districtcode, model.areaCode, model.priceCode, model.houseType, model.tagCode, model.acreageCode, model.directionCode, model.floorCode );
+
+}
 
 @end

@@ -15,6 +15,9 @@
 
 - (void)didSelectedTagView;
 
+/** 接口参数 */
+- (void)resultViewFilterParams:(ZYMenuParamsModel *)model;
+
 @end
 
 @interface ZYMenuResultView : UIView
