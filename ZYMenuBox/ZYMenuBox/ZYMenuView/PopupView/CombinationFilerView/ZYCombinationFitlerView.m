@@ -215,7 +215,6 @@
         for (ZYSelectedPath *selectedPath in subArray) {
             ZYItem *lastItem = self.item.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath];
             lastItem.isSelected = NO;
-            
         }
 
         // 特殊处理 滑块 重置数据
@@ -224,7 +223,6 @@
             if (idx == self.selectedArray.count - 1) {
                 ZYItem *lastItem = self.item.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath];
                 lastItem.isSelected = NO;
-                self.item.childrenNodes[selectedPath.firstPath].childrenNodes[selectedPath.secondPath].title = i == 0 ? @"0" : @"40";
             }
         }
         

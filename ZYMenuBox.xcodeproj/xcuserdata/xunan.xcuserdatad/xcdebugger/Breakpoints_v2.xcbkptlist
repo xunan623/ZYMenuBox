@@ -20,70 +20,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "522726452.332679"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
-            landmarkName = "-popupViewWillDismiss:didSelectedItemsPackagingInArray:atIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "522726520.090373"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
-            landmarkName = "-popupViewWillDismiss:didSelectedItemsPackagingInArray:atIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "522726932.039992"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "-popupView:didSelectedItemsPackagingInArray:atIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "522726990.527312"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
-            landmarkName = "-popupViewWillDismiss:didSelectedItemsPackagingInArray:atIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
             timestampString = "522727310.703119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -163,13 +99,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/TitleView/ZYMenuView.m"
-            timestampString = "522727616.221025"
+            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/PopupView/CombinationFilerView/ZYCombinationFitlerView.m"
+            timestampString = "522729057.397826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-didTapDropDownView:atIndex:"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-_recoverToTheOriginalState"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ZYMenuBox/ZYMenuBox/ZYMenuView/PopupView/CombinationFilerView/ZYCombinationFitlerView.m"
+            timestampString = "522729098.604337"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "-_recoverToTheOriginalState"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

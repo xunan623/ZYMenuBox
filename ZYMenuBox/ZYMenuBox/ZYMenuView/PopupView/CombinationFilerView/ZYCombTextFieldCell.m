@@ -69,22 +69,36 @@
                                                                 CombinaTableViewHeaderHeight,
                                                                 kScreenWidth - 2 * CombinaTableViewSliderLeftMargin,
                                                                 ComTextFieldCenterViewH)
-                                            minValue:0
-                                            maxValue:40
+                                            minValue:CombinaSliderMinValue
+                                            maxValue:CombinaSliderMaxValue
                                      blockSpaceValue:1];
     slider.progressRadius = 0.0;
     
     slider.minIndicateView.backIndicateColor = [UIColor clearColor];
     slider.maxIndicateView.backIndicateColor = [UIColor clearColor];
     
-    [slider.minIndicateView setTitle:[NSString stringWithFormat:@"%.f层", floor([item.childrenNodes[0].title floatValue])]];
-    [slider.maxIndicateView setTitle:[NSString stringWithFormat:@"%.f层", floor([item.childrenNodes[1].title floatValue])]];
+    if (!item.childrenNodes[0].isSelected && !item.childrenNodes[1].isSelected) {
+        [slider.minIndicateView setTitle:[NSString stringWithFormat:@"%.f层", CombinaSliderMinValue]];
+        [slider.maxIndicateView setTitle:[NSString stringWithFormat:@"%.f层", CombinaSliderMaxValue]];
 
-    slider.frontScale = 0.7;
-    slider.frontValue = 15;
+        slider.frontScale = 0.7;
+        slider.frontValue = 15;
 
-    [slider setCurrentMaxValue:[item.childrenNodes[1].title floatValue]];
-    [slider setCurrentMinValue:[item.childrenNodes[0].title floatValue]];
+        [slider setCurrentMaxValue:CombinaSliderMaxValue];
+        [slider setCurrentMinValue:CombinaSliderMinValue];
+
+    } else {
+        [slider.minIndicateView setTitle:[NSString stringWithFormat:@"%.f层", floor([item.childrenNodes[0].title floatValue])]];
+        [slider.maxIndicateView setTitle:[NSString stringWithFormat:@"%.f层", floor([item.childrenNodes[1].title floatValue])]];
+        
+        slider.frontScale = 0.7;
+        slider.frontValue = 15;
+        
+        [slider setCurrentMaxValue:[item.childrenNodes[1].title floatValue]];
+        [slider setCurrentMinValue:[item.childrenNodes[0].title floatValue]];
+
+    }
+    
     
     __weak __block typeof(self) blockSelf = self;
     

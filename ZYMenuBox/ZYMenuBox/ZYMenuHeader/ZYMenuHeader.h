@@ -103,8 +103,9 @@ static NSString *CombinaTableViewHeaderTextLabelColor = @"838EA6";
 // 滑竿距离左侧
 static const CGFloat CombinaTableViewSliderLeftMargin = 15.0f;
 
-
-
+// 滑竿数据最值
+static const CGFloat CombinaSliderMaxValue = 40;
+static const CGFloat CombinaSliderMinValue = 0;
 
 
 
